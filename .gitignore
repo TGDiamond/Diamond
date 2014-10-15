@@ -1,12 +1,12 @@
 *.tar.gz
 
 *.exe
-src/bitcoin
-src/bitcoind
-src/bitcoin-cli
-src/bitcoin-tx
-src/test/test_bitcoin
-src/qt/test/test_bitcoin-qt
+src/diamond
+src/diamondd
+src/diamond-cli
+src/diamond-tx
+src/test/test_diamond
+src/qt/test/test_diamond-qt
 
 # autoreconf
 Makefile.in
@@ -29,8 +29,8 @@ config.log
 config.status
 configure
 libtool
-src/config/bitcoin-config.h
-src/config/bitcoin-config.h.in
+src/config/diamond-config.h
+src/config/diamond-config.h.in
 src/config/stamp-h1
 share/setup.nsi
 share/qt/Info.plist
@@ -54,7 +54,7 @@ src/qt/test/moc*.cpp
 *.o
 *.o-*
 *.patch
-.bitcoin
+.diamond
 *.a
 *.pb.cc
 *.pb.h
@@ -69,12 +69,12 @@ src/qt/test/moc*.cpp
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-bitcoin-qt
-Bitcoin-Qt.app
+diamond-qt
+Diamond-Qt.app
 
 # Unit-tests
 Makefile.test
-bitcoin-qt_test
+diamond-qt_test
 
 # Resources cpp
 qrc_*.cpp
@@ -89,7 +89,7 @@ build
 #lcov
 *.gcno
 /*.info
-test_bitcoin.coverage/
+test_diamond.coverage/
 total.coverage/
 coverage_percent.txt
 
@@ -97,7 +97,7 @@ coverage_percent.txt
 linux-coverage-build
 linux-build
 win32-build
-qa/pull-tester/run-bitcoind-for-test.sh
+qa/pull-tester/run-diamondd-for-test.sh
 qa/pull-tester/build-tests.sh
 
 !src/leveldb*/Makefile

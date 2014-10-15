@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2014 The Bitcoin Core developers
+// Copyright (c) 2011-2014 The Diamond Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -213,7 +213,7 @@ BOOST_AUTO_TEST_CASE(util_ParseMoney)
     BOOST_CHECK(ParseMoney("0.00000001", ret));
     BOOST_CHECK_EQUAL(ret, COIN/100000000);
 
-    // Attempted 63 bit overflow should fail
+    // Attempted 63 dia overflow should fail
     BOOST_CHECK(!ParseMoney("92233720368.54775808", ret));
 }
 
@@ -279,8 +279,8 @@ BOOST_AUTO_TEST_CASE(util_TimingResistantEqual)
 #define E "check_postfix"
 BOOST_AUTO_TEST_CASE(strprintf_numbers)
 {
-    int64_t s64t = -9223372036854775807LL; /* signed 64 bit test value */
-    uint64_t u64t = 18446744073709551615ULL; /* unsigned 64 bit test value */
+    int64_t s64t = -9223372036854775807LL; /* signed 64 dia test value */
+    uint64_t u64t = 18446744073709551615ULL; /* unsigned 64 dia test value */
     BOOST_CHECK(strprintf("%s %d %s", B, s64t, E) == B" -9223372036854775807 "E);
     BOOST_CHECK(strprintf("%s %u %s", B, u64t, E) == B" 18446744073709551615 "E);
     BOOST_CHECK(strprintf("%s %x %s", B, u64t, E) == B" ffffffffffffffff "E);

@@ -2,15 +2,15 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_CHAIN_PARAMS_BASE_H
-#define BITCOIN_CHAIN_PARAMS_BASE_H
+#ifndef DIAMOND_CHAIN_PARAMS_BASE_H
+#define DIAMOND_CHAIN_PARAMS_BASE_H
 
 #include <string>
 #include <vector>
 
 /**
- * CBaseChainParams defines the base parameters (shared between bitcoin-cli and bitcoind)
- * of a given instance of the Bitcoin system.
+ * CBaseChainParams defines the base parameters (shared between diamond-cli and diamondd)
+ * of a given instance of the Diamond system.
  */
 class CBaseChainParams
 {
@@ -57,4 +57,4 @@ bool SelectBaseParamsFromCommandLine();
  */
 bool AreBaseParamsConfigured();
 
-#endif // BITCOIN_CHAIN_PARAMS_BASE_H
+#endif // DIAMOND_CHAIN_PARAMS_BASE_H

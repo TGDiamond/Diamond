@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_LEVELDBWRAPPER_H
-#define BITCOIN_LEVELDBWRAPPER_H
+#ifndef DIAMOND_LEVELDBWRAPPER_H
+#define DIAMOND_LEVELDBWRAPPER_H
 
 #include "serialize.h"
 #include "util.h"
@@ -168,4 +168,4 @@ public:
     }
 };
 
-#endif // BITCOIN_LEVELDBWRAPPER_H
+#endif // DIAMOND_LEVELDBWRAPPER_H

@@ -22,7 +22,7 @@ public:
     static const QDateTime MIN_DATE;
     /** Last date that can be represented (far in the future) */
     static const QDateTime MAX_DATE;
-    /** Type filter bit field (all types) */
+    /** Type filter dia field (all types) */
     static const quint32 ALL_TYPES = 0xFFFFFFFF;
 
     static quint32 TYPE(int type) { return 1<<type; }
@@ -37,7 +37,7 @@ public:
     void setDateRange(const QDateTime &from, const QDateTime &to);
     void setAddressPrefix(const QString &addrPrefix);
     /**
-      @note Type filter takes a bit field created with TYPE() or ALL_TYPES
+      @note Type filter takes a dia field created with TYPE() or ALL_TYPES
      */
     void setTypeFilter(quint32 modes);
     void setMinAmount(const CAmount& minimum);

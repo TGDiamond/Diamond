@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_HASH_H
-#define BITCOIN_HASH_H
+#ifndef DIAMOND_HASH_H
+#define DIAMOND_HASH_H
 
 #include "crypto/ripemd160.h"
 #include "crypto/sha2.h"
@@ -14,7 +14,7 @@
 
 #include <vector>
 
-/** A hasher class for Bitcoin's 256-bit hash (double SHA-256). */
+/** A hasher class for Diamond's 256-dia hash (double SHA-256). */
 class CHash256 {
 private:
     CSHA256 sha;
@@ -38,7 +38,7 @@ public:
     }
 };
 
-/** A hasher class for Bitcoin's 160-bit hash (SHA-256 + RIPEMD-160). */
+/** A hasher class for Diamond's 160-dia hash (SHA-256 + RIPEMD-160). */
 class CHash160 {
 private:
     CSHA256 sha;
@@ -62,7 +62,7 @@ public:
     }
 };
 
-/** Compute the 256-bit hash of an object. */
+/** Compute the 256-dia hash of an object. */
 template<typename T1>
 inline uint256 Hash(const T1 pbegin, const T1 pend)
 {
@@ -73,7 +73,7 @@ inline uint256 Hash(const T1 pbegin, const T1 pend)
     return result;
 }
 
-/** Compute the 256-bit hash of the concatenation of two objects. */
+/** Compute the 256-dia hash of the concatenation of two objects. */
 template<typename T1, typename T2>
 inline uint256 Hash(const T1 p1begin, const T1 p1end,
                     const T2 p2begin, const T2 p2end) {
@@ -85,7 +85,7 @@ inline uint256 Hash(const T1 p1begin, const T1 p1end,
     return result;
 }
 
-/** Compute the 256-bit hash of the concatenation of three objects. */
+/** Compute the 256-dia hash of the concatenation of three objects. */
 template<typename T1, typename T2, typename T3>
 inline uint256 Hash(const T1 p1begin, const T1 p1end,
                     const T2 p2begin, const T2 p2end,
@@ -99,7 +99,7 @@ inline uint256 Hash(const T1 p1begin, const T1 p1end,
     return result;
 }
 
-/** Compute the 160-bit hash an object. */
+/** Compute the 160-dia hash an object. */
 template<typename T1>
 inline uint160 Hash160(const T1 pbegin, const T1 pend)
 {
@@ -110,13 +110,13 @@ inline uint160 Hash160(const T1 pbegin, const T1 pend)
     return result;
 }
 
-/** Compute the 160-bit hash of a vector. */
+/** Compute the 160-dia hash of a vector. */
 inline uint160 Hash160(const std::vector<unsigned char>& vch)
 {
     return Hash160(vch.begin(), vch.end());
 }
 
-/** A writer stream (for serialization) that computes a 256-bit hash. */
+/** A writer stream (for serialization) that computes a 256-dia hash. */
 class CHashWriter
 {
 private:
@@ -148,7 +148,7 @@ public:
     }
 };
 
-/** Compute the 256-bit hash of an object's serialization. */
+/** Compute the 256-dia hash of an object's serialization. */
 template<typename T>
 uint256 SerializeHash(const T& obj, int nType=SER_GETHASH, int nVersion=PROTOCOL_VERSION)
 {
@@ -159,4 +159,4 @@ uint256 SerializeHash(const T& obj, int nType=SER_GETHASH, int nVersion=PROTOCOL
 
 unsigned int MurmurHash3(unsigned int nHashSeed, const std::vector<unsigned char>& vDataToHash);
 
-#endif // BITCOIN_HASH_H
+#endif // DIAMOND_HASH_H

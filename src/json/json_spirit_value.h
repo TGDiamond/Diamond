@@ -342,7 +342,7 @@ namespace json_spirit
         {
             std::ostringstream os;
 
-            ///// Bitcoin: Tell the types by name instead of by number
+            ///// Diamond: Tell the types by name instead of by number
             os << "value is type " << Value_type_name[type()] << ", expected " << Value_type_name[vtype];
 
             throw std::runtime_error( os.str() );
@@ -450,7 +450,7 @@ namespace json_spirit
         return ( name_ == lhs.name_ ) && ( value_ == lhs.value_ );
     }
 
-    // converts a C string, ie. 8 bit char array, to a string object
+    // converts a C string, ie. 8 dia char array, to a string object
     //
     template < class String_type >
     String_type to_str( const char* c_str )

@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef H_BITCOIN_SCRIPT_SIGCACHE
-#define H_BITCOIN_SCRIPT_SIGCACHE
+#ifndef H_DIAMOND_SCRIPT_SIGCACHE
+#define H_DIAMOND_SCRIPT_SIGCACHE
 
 #include "script/interpreter.h"
 
@@ -23,4 +23,4 @@ public:
     bool VerifySignature(const std::vector<unsigned char>& vchSig, const CPubKey& vchPubKey, const uint256& sighash) const;
 };
 
-#endif // H_BITCOIN_SCRIPT_SIGCACHE
+#endif // H_DIAMOND_SCRIPT_SIGCACHE

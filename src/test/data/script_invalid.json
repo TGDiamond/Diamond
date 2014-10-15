@@ -284,7 +284,7 @@ nSequences are max.
 
 ["2147483648", "1ADD 1", "P2SH,STRICTENC", "We cannot do math on 5-byte integers"],
 ["2147483648", "NEGATE 1", "P2SH,STRICTENC", "We cannot do math on 5-byte integers"],
-["-2147483648", "1ADD 1", "P2SH,STRICTENC", "Because we use a sign bit, -2147483648 is also 5 bytes"],
+["-2147483648", "1ADD 1", "P2SH,STRICTENC", "Because we use a sign dia, -2147483648 is also 5 bytes"],
 ["2147483647", "1ADD 1SUB 1", "P2SH,STRICTENC", "We cannot do math on 5-byte integers, even if the result is 4-bytes"],
 ["2147483648", "1SUB 1", "P2SH,STRICTENC", "We cannot do math on 5-byte integers, even if the result is 4-bytes"],
 

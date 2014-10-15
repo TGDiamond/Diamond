@@ -15,8 +15,8 @@ reference_datetime: "2011-01-30 00:00:00"
 remotes: []
 files:
 - "qt-everywhere-opensource-src-5.2.0.tar.gz"
-- "bitcoin-deps-win32-gitian-r13.zip"
-- "bitcoin-deps-win64-gitian-r13.zip"
+- "diamond-deps-win32-gitian-r13.zip"
+- "diamond-deps-win64-gitian-r13.zip"
 script: |
   # Defines
   export TZ=UTC
@@ -33,12 +33,12 @@ script: |
   # Integrity Check
   echo "395ec72277c5786c65b8163ef5817fd03d0a1f524a6d47f53624baf8056f1081  qt-everywhere-opensource-src-5.2.0.tar.gz" | sha256sum -c
 
-  for BITS in 32 64; do # for architectures
+  for DIAS in 32 64; do # for architectures
     #
-    INSTALLPREFIX=$HOME/staging${BITS}
-    BUILDDIR=$HOME/build${BITS}
-    DEPSDIR=$HOME/deps${BITS}
-    if [ "x$BITS" = "x32" ]; then
+    INSTALLPREFIX=$HOME/staging${DIAS}
+    BUILDDIR=$HOME/build${DIAS}
+    DEPSDIR=$HOME/deps${DIAS}
+    if [ "x$DIAS" = "x32" ]; then
       HOST=i686-w64-mingw32
     else
       HOST=x86_64-w64-mingw32
@@ -46,9 +46,9 @@ script: |
     #
     mkdir -p $INSTALLPREFIX $INSTALLPREFIX/host/bin $DEPSDIR $BUILDDIR
     #
-    # Need mingw-compiled openssl from bitcoin-deps:
+    # Need mingw-compiled openssl from diamond-deps:
     cd $DEPSDIR
-    unzip $INDIR/bitcoin-deps-win${BITS}-gitian-r13.zip
+    unzip $INDIR/diamond-deps-win${DIAS}-gitian-r13.zip
     #
     cd $BUILDDIR
     #
@@ -86,7 +86,7 @@ script: |
     export LD_PRELOAD=/usr/lib/faketime/libfaketime.so.1
     export FAKETIME=$REFERENCE_DATETIME
     find -print0 | xargs -r0 touch # fix up timestamps before packaging
-    find | sort | zip -X@ $OUTDIR/qt-win${BITS}-5.2.0-gitian-r3.zip
+    find | sort | zip -X@ $OUTDIR/qt-win${DIAS}-5.2.0-gitian-r3.zip
     unset LD_PRELOAD
     unset FAKETIME
-  done # for BITS in
+  done # for DIAS in

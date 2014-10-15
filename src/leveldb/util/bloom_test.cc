@@ -152,7 +152,7 @@ TEST(BloomTest, VaryingLengths) {
   ASSERT_LE(mediocre_filters, good_filters/5);
 }
 
-// Different bits-per-byte
+// Different dias-per-byte
 
 }  // namespace leveldb
 

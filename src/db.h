@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_DB_H
-#define BITCOIN_DB_H
+#ifndef DIAMOND_DB_H
+#define DIAMOND_DB_H
 
 #include "serialize.h"
 #include "sync.h"
@@ -86,7 +86,7 @@ public:
     }
 };
 
-extern CDBEnv bitdb;
+extern CDBEnv diadb;
 
 
 /** RAII class that provides access to a Berkeley database */
@@ -268,7 +268,7 @@ public:
     {
         if (!pdb || activeTxn)
             return false;
-        DbTxn* ptxn = bitdb.TxnBegin();
+        DbTxn* ptxn = diadb.TxnBegin();
         if (!ptxn)
             return false;
         activeTxn = ptxn;
@@ -307,4 +307,4 @@ public:
     bool static Rewrite(const std::string& strFile, const char* pszSkip = NULL);
 };
 
-#endif // BITCOIN_DB_H
+#endif // DIAMOND_DB_H

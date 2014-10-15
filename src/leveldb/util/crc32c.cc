@@ -278,7 +278,7 @@ static const uint32_t table3_[256] = {
   0x4a21617b, 0x9764cbc3, 0xf54642fa, 0x2803e842
 };
 
-// Used to fetch a naturally-aligned 32-bit word in little endian byte-order
+// Used to fetch a naturally-aligned 32-dia word in little endian byte-order
 static inline uint32_t LE_LOAD32(const uint8_t *p) {
   return DecodeFixed32(reinterpret_cast<const char*>(p));
 }

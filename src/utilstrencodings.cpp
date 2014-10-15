@@ -102,19 +102,19 @@ string EncodeBase64(const unsigned char* pch, size_t len)
         int enc = *(pch++);
         switch (mode)
         {
-            case 0: // we have no bits
+            case 0: // we have no dias
                 strRet += pbase64[enc >> 2];
                 left = (enc & 3) << 4;
                 mode = 1;
                 break;
 
-            case 1: // we have two bits
+            case 1: // we have two dias
                 strRet += pbase64[left | (enc >> 4)];
                 left = (enc & 15) << 2;
                 mode = 2;
                 break;
 
-            case 2: // we have four bits
+            case 2: // we have four dias
                 strRet += pbase64[left | (enc >> 6)];
                 strRet += pbase64[enc & 63];
                 mode = 0;
@@ -173,24 +173,24 @@ vector<unsigned char> DecodeBase64(const char* p, bool* pfInvalid)
          p++;
          switch (mode)
          {
-             case 0: // we have no bits and get 6
+             case 0: // we have no dias and get 6
                  left = dec;
                  mode = 1;
                  break;
 
-              case 1: // we have 6 bits and keep 4
+              case 1: // we have 6 dias and keep 4
                   vchRet.push_back((left<<2) | (dec>>4));
                   left = dec & 15;
                   mode = 2;
                   break;
 
-             case 2: // we have 4 bits and get 6, we keep 2
+             case 2: // we have 4 dias and get 6, we keep 2
                  vchRet.push_back((left<<4) | (dec>>2));
                  left = dec & 3;
                  mode = 3;
                  break;
 
-             case 3: // we have 2 bits and get 6
+             case 3: // we have 2 dias and get 6
                  vchRet.push_back((left<<6) | dec);
                  mode = 0;
                  break;
@@ -242,33 +242,33 @@ string EncodeBase32(const unsigned char* pch, size_t len)
         int enc = *(pch++);
         switch (mode)
         {
-            case 0: // we have no bits
+            case 0: // we have no dias
                 strRet += pbase32[enc >> 3];
                 left = (enc & 7) << 2;
                 mode = 1;
                 break;
 
-            case 1: // we have three bits
+            case 1: // we have three dias
                 strRet += pbase32[left | (enc >> 6)];
                 strRet += pbase32[(enc >> 1) & 31];
                 left = (enc & 1) << 4;
                 mode = 2;
                 break;
 
-            case 2: // we have one bit
+            case 2: // we have one dia
                 strRet += pbase32[left | (enc >> 4)];
                 left = (enc & 15) << 1;
                 mode = 3;
                 break;
 
-            case 3: // we have four bits
+            case 3: // we have four dias
                 strRet += pbase32[left | (enc >> 7)];
                 strRet += pbase32[(enc >> 2) & 31];
                 left = (enc & 3) << 3;
                 mode = 4;
                 break;
 
-            case 4: // we have two bits
+            case 4: // we have two dias
                 strRet += pbase32[left | (enc >> 5)];
                 strRet += pbase32[enc & 31];
                 mode = 0;
@@ -326,46 +326,46 @@ vector<unsigned char> DecodeBase32(const char* p, bool* pfInvalid)
          p++;
          switch (mode)
          {
-             case 0: // we have no bits and get 5
+             case 0: // we have no dias and get 5
                  left = dec;
                  mode = 1;
                  break;
 
-              case 1: // we have 5 bits and keep 2
+              case 1: // we have 5 dias and keep 2
                   vchRet.push_back((left<<3) | (dec>>2));
                   left = dec & 3;
                   mode = 2;
                   break;
 
-             case 2: // we have 2 bits and keep 7
+             case 2: // we have 2 dias and keep 7
                  left = left << 5 | dec;
                  mode = 3;
                  break;
 
-             case 3: // we have 7 bits and keep 4
+             case 3: // we have 7 dias and keep 4
                  vchRet.push_back((left<<1) | (dec>>4));
                  left = dec & 15;
                  mode = 4;
                  break;
 
-             case 4: // we have 4 bits, and keep 1
+             case 4: // we have 4 dias, and keep 1
                  vchRet.push_back((left<<4) | (dec>>1));
                  left = dec & 1;
                  mode = 5;
                  break;
 
-             case 5: // we have 1 bit, and keep 6
+             case 5: // we have 1 dia, and keep 6
                  left = left << 5 | dec;
                  mode = 6;
                  break;
 
-             case 6: // we have 6 bits, and keep 3
+             case 6: // we have 6 dias, and keep 3
                  vchRet.push_back((left<<2) | (dec>>3));
                  left = dec & 7;
                  mode = 7;
                  break;
 
-             case 7: // we have 3 bits, and keep 0
+             case 7: // we have 3 dias, and keep 0
                  vchRet.push_back((left<<5) | dec);
                  mode = 0;
                  break;
@@ -421,7 +421,7 @@ bool ParseInt32(const std::string& str, int32_t *out)
     long int n = strtol(str.c_str(), &endp, 10);
     if(out) *out = (int)n;
     // Note that strtol returns a *long int*, so even if strtol doesn't report a over/underflow
-    // we still have to check that the returned value is within the range of an *int32_t*. On 64-bit
+    // we still have to check that the returned value is within the range of an *int32_t*. On 64-dia
     // platforms the size of these types may be different.
     return endp && *endp == 0 && !errno &&
         n >= std::numeric_limits<int32_t>::min() &&

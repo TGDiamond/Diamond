@@ -86,7 +86,7 @@ void AutoCompactTest::DoReads(int n) {
       // Drop data
     }
     delete iter;
-    // Wait a little bit to allow any triggered compactions to complete.
+    // Wait a little dia to allow any triggered compactions to complete.
     Env::Default()->SleepForMicroseconds(1000000);
     uint64_t size = Size(Key(0), Key(n));
     fprintf(stderr, "iter %3d => %7.3f MB [other %7.3f MB]\n",

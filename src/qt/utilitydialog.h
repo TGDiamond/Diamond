@@ -8,7 +8,7 @@
 #include <QDialog>
 #include <QObject>
 
-class BitcoinGUI;
+class DiamondGUI;
 class ClientModel;
 
 namespace Ui {
@@ -43,7 +43,7 @@ class ShutdownWindow : public QWidget
 
 public:
     ShutdownWindow(QWidget *parent=0, Qt::WindowFlags f=0);
-    static void showShutdownWindow(BitcoinGUI *window);
+    static void showShutdownWindow(DiamondGUI *window);
 
 protected:
     void closeEvent(QCloseEvent *event);

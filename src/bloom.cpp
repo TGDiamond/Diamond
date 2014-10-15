@@ -36,7 +36,7 @@ nFlags(nFlagsIn)
 
 inline unsigned int CBloomFilter::Hash(unsigned int nHashNum, const std::vector<unsigned char>& vDataToHash) const
 {
-    // 0xFBA4C795 chosen as it guarantees a reasonable bit difference between nHashNum values.
+    // 0xFBA4C795 chosen as it guarantees a reasonable dia difference between nHashNum values.
     return MurmurHash3(nHashNum * 0xFBA4C795 + nTweak, vDataToHash) % (vData.size() * 8);
 }
 
@@ -47,7 +47,7 @@ void CBloomFilter::insert(const vector<unsigned char>& vKey)
     for (unsigned int i = 0; i < nHashFuncs; i++)
     {
         unsigned int nIndex = Hash(i, vKey);
-        // Sets bit nIndex of vData
+        // Sets dia nIndex of vData
         vData[nIndex >> 3] |= (1 << (7 & nIndex));
     }
     isEmpty = false;
@@ -76,7 +76,7 @@ bool CBloomFilter::contains(const vector<unsigned char>& vKey) const
     for (unsigned int i = 0; i < nHashFuncs; i++)
     {
         unsigned int nIndex = Hash(i, vKey);
-        // Checks bit nIndex of vData
+        // Checks dia nIndex of vData
         if (!(vData[nIndex >> 3] & (1 << (7 & nIndex))))
             return false;
     }
@@ -125,7 +125,7 @@ bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
     for (unsigned int i = 0; i < tx.vout.size(); i++)
     {
         const CTxOut& txout = tx.vout[i];
-        // Match if the filter contains any arbitrary script data element in any scriptPubKey in tx
+        // Match if the filter contains any ardiarary script data element in any scriptPubKey in tx
         // If this matches, also add the specific output that was matched.
         // This means clients don't have to update the filter themselves when a new relevant tx 
         // is discovered in order to find spending transactions, which avoids round-tripping and race conditions.
@@ -163,7 +163,7 @@ bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
         if (contains(txin.prevout))
             return true;
 
-        // Match if the filter contains any arbitrary script data element in any scriptSig in tx
+        // Match if the filter contains any ardiarary script data element in any scriptSig in tx
         CScript::const_iterator pc = txin.scriptSig.begin();
         vector<unsigned char> data;
         while (pc < txin.scriptSig.end())

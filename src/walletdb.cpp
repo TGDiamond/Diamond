@@ -193,25 +193,25 @@ bool CWalletDB::WriteAccountingEntry(const CAccountingEntry& acentry)
     return WriteAccountingEntry(++nAccountingEntryNumber, acentry);
 }
 
-CAmount CWalletDB::GetAccountCreditDebit(const string& strAccount)
+CAmount CWalletDB::GetAccountCreditDedia(const string& strAccount)
 {
     list<CAccountingEntry> entries;
-    ListAccountCreditDebit(strAccount, entries);
+    ListAccountCreditDedia(strAccount, entries);
 
-    CAmount nCreditDebit = 0;
+    CAmount nCreditDedia = 0;
     BOOST_FOREACH (const CAccountingEntry& entry, entries)
-        nCreditDebit += entry.nCreditDebit;
+        nCreditDedia += entry.nCreditDedia;
 
-    return nCreditDebit;
+    return nCreditDedia;
 }
 
-void CWalletDB::ListAccountCreditDebit(const string& strAccount, list<CAccountingEntry>& entries)
+void CWalletDB::ListAccountCreditDedia(const string& strAccount, list<CAccountingEntry>& entries)
 {
     bool fAllAccounts = (strAccount == "*");
 
     Dbc* pcursor = GetCursor();
     if (!pcursor)
-        throw runtime_error("CWalletDB::ListAccountCreditDebit() : cannot create DB cursor");
+        throw runtime_error("CWalletDB::ListAccountCreditDedia() : cannot create DB cursor");
     unsigned int fFlags = DB_SET_RANGE;
     while (true)
     {
@@ -227,7 +227,7 @@ void CWalletDB::ListAccountCreditDebit(const string& strAccount, list<CAccountin
         else if (ret != 0)
         {
             pcursor->close();
-            throw runtime_error("CWalletDB::ListAccountCreditDebit() : error scanning DB");
+            throw runtime_error("CWalletDB::ListAccountCreditDedia() : error scanning DB");
         }
 
         // Unserialize
@@ -265,7 +265,7 @@ DBErrors CWalletDB::ReorderTransactions(CWallet* pwallet)
         txByTime.insert(make_pair(wtx->nTimeReceived, TxPair(wtx, (CAccountingEntry*)0)));
     }
     list<CAccountingEntry> acentries;
-    ListAccountCreditDebit("", acentries);
+    ListAccountCreditDedia("", acentries);
     BOOST_FOREACH(CAccountingEntry& entry, acentries)
     {
         txByTime.insert(make_pair(entry.nTime, TxPair((CWalletTx*)0, &entry)));
@@ -355,13 +355,13 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
         {
             string strAddress;
             ssKey >> strAddress;
-            ssValue >> pwallet->mapAddressBook[CBitcoinAddress(strAddress).Get()].name;
+            ssValue >> pwallet->mapAddressBook[CDiamondAddress(strAddress).Get()].name;
         }
         else if (strType == "purpose")
         {
             string strAddress;
             ssKey >> strAddress;
-            ssValue >> pwallet->mapAddressBook[CBitcoinAddress(strAddress).Get()].purpose;
+            ssValue >> pwallet->mapAddressBook[CDiamondAddress(strAddress).Get()].purpose;
         }
         else if (strType == "tx")
         {
@@ -584,7 +584,7 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
             ssKey >> strAddress;
             ssKey >> strKey;
             ssValue >> strValue;
-            if (!pwallet->LoadDestData(CBitcoinAddress(strAddress).Get(), strKey, strValue))
+            if (!pwallet->LoadDestData(CDiamondAddress(strAddress).Get(), strKey, strValue))
             {
                 strErr = "Error reading wallet database: LoadDestData failed";
                 return false;
@@ -790,7 +790,7 @@ DBErrors CWalletDB::ZapWalletTx(CWallet* pwallet, vector<CWalletTx>& vWtx)
 void ThreadFlushWalletDB(const string& strFile)
 {
     // Make this thread recognisable as the wallet flushing thread
-    RenameThread("bitcoin-wallet");
+    RenameThread("diamond-wallet");
 
     static bool fOneThread;
     if (fOneThread)
@@ -814,13 +814,13 @@ void ThreadFlushWalletDB(const string& strFile)
 
         if (nLastFlushed != nWalletDBUpdated && GetTime() - nLastWalletUpdate >= 2)
         {
-            TRY_LOCK(bitdb.cs_db,lockDb);
+            TRY_LOCK(diadb.cs_db,lockDb);
             if (lockDb)
             {
                 // Don't do this if any databases are in use
                 int nRefCount = 0;
-                map<string, int>::iterator mi = bitdb.mapFileUseCount.begin();
-                while (mi != bitdb.mapFileUseCount.end())
+                map<string, int>::iterator mi = diadb.mapFileUseCount.begin();
+                while (mi != diadb.mapFileUseCount.end())
                 {
                     nRefCount += (*mi).second;
                     mi++;
@@ -829,18 +829,18 @@ void ThreadFlushWalletDB(const string& strFile)
                 if (nRefCount == 0)
                 {
                     boost::this_thread::interruption_point();
-                    map<string, int>::iterator mi = bitdb.mapFileUseCount.find(strFile);
-                    if (mi != bitdb.mapFileUseCount.end())
+                    map<string, int>::iterator mi = diadb.mapFileUseCount.find(strFile);
+                    if (mi != diadb.mapFileUseCount.end())
                     {
                         LogPrint("db", "Flushing wallet.dat\n");
                         nLastFlushed = nWalletDBUpdated;
                         int64_t nStart = GetTimeMillis();
 
                         // Flush wallet.dat so it's self contained
-                        bitdb.CloseDb(strFile);
-                        bitdb.CheckpointLSN(strFile);
+                        diadb.CloseDb(strFile);
+                        diadb.CheckpointLSN(strFile);
 
-                        bitdb.mapFileUseCount.erase(mi++);
+                        diadb.mapFileUseCount.erase(mi++);
                         LogPrint("db", "Flushed wallet.dat %dms\n", GetTimeMillis() - nStart);
                     }
                 }
@@ -856,13 +856,13 @@ bool BackupWallet(const CWallet& wallet, const string& strDest)
     while (true)
     {
         {
-            LOCK(bitdb.cs_db);
-            if (!bitdb.mapFileUseCount.count(wallet.strWalletFile) || bitdb.mapFileUseCount[wallet.strWalletFile] == 0)
+            LOCK(diadb.cs_db);
+            if (!diadb.mapFileUseCount.count(wallet.strWalletFile) || diadb.mapFileUseCount[wallet.strWalletFile] == 0)
             {
                 // Flush log data to the dat file
-                bitdb.CloseDb(wallet.strWalletFile);
-                bitdb.CheckpointLSN(wallet.strWalletFile);
-                bitdb.mapFileUseCount.erase(wallet.strWalletFile);
+                diadb.CloseDb(wallet.strWalletFile);
+                diadb.CheckpointLSN(wallet.strWalletFile);
+                diadb.mapFileUseCount.erase(wallet.strWalletFile);
 
                 // Copy wallet.dat
                 filesystem::path pathSrc = GetDataDir() / wallet.strWalletFile;

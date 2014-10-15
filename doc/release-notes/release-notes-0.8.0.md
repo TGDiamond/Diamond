@@ -1,11 +1,11 @@
-Bitcoin-Qt version 0.8.0 is now available from:
-  http://sourceforge.net/projects/bitcoin/files/Bitcoin/bitcoin-0.8.0/
+Diamond-Qt version 0.8.0 is now available from:
+  http://sourceforge.net/projects/diamond/files/Diamond/diamond-0.8.0/
 
 This is a major release designed to improve performance and handle the
 increasing volume of transactions on the network.
 
 Please report bugs using the issue tracker at github:
-  https://github.com/bitcoin/bitcoin/issues
+  https://github.com/diamond/diamond/issues
 
 How to Upgrade
 --------------
@@ -13,7 +13,7 @@ How to Upgrade
 If you are running an older version, shut it down. Wait
 until it has completely shut down (which might take a few minutes for older
 versions), then run the installer (on Windows) or just copy over
-/Applications/Bitcoin-Qt (on Mac) or bitcoind/bitcoin-qt (on Linux).
+/Applications/Diamond-Qt (on Mac) or diamondd/diamond-qt (on Linux).
 
 The first time you run after the upgrade a re-indexing process will be
 started that will take anywhere from 30 minutes to several hours,
@@ -23,7 +23,7 @@ Incompatible Changes
 --------------------
 
 This release no longer maintains a full index of historical transaction ids
-by default, so looking up an arbitrary transaction using the getrawtransaction
+by default, so looking up an ardiarary transaction using the getrawtransaction
 RPC call will not work. If you need that functionality, you must run once
 with -txindex=1 -reindex=1 to rebuild block-chain indices (see below for more
 details).
@@ -31,7 +31,7 @@ details).
 Improvements
 ------------
 
-Mac and Windows binaries are signed with certificates owned by the Bitcoin
+Mac and Windows binaries are signed with certificates owned by the Diamond
 Foundation, to be compatible with the new security features in OSX 10.8 and
 Windows 8.
 
@@ -61,7 +61,7 @@ contrib/spendfrom is a python-language command-line utility that demonstrates
 how to use the "raw transactions" JSON-RPC api to send coins received from particular
 addresses (also known as "coin control").
 
-New/changed settings (command-line or bitcoin.conf file)
+New/changed settings (command-line or diamond.conf file)
 --------------------------------------------------------
 
 dbcache : controls LevelDB memory usage.
@@ -96,7 +96,7 @@ Zero-confirmation transaction vulnerability: accepting zero-confirmation transac
 (transactions that have not yet been included in a block) from somebody you do not
 trust is still not recommended, because there will always be ways for attackers to
 double-spend zero-confirmation transactions. However, this release includes a bug
-fix that makes it a little bit more difficult for attackers to double-spend a
+fix that makes it a little dia more difficult for attackers to double-spend a
 certain type ("lockTime in the future") of zero-confirmation transaction.
 
 Dependency Changes

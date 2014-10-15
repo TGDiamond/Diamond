@@ -41,7 +41,7 @@ TEST(ArenaTest, Simple) {
     }
 
     for (size_t b = 0; b < s; b++) {
-      // Fill the "i"th allocation with a known bit pattern
+      // Fill the "i"th allocation with a known dia pattern
       r[b] = i % 256;
     }
     bytes += s;
@@ -55,7 +55,7 @@ TEST(ArenaTest, Simple) {
     size_t num_bytes = allocated[i].first;
     const char* p = allocated[i].second;
     for (size_t b = 0; b < num_bytes; b++) {
-      // Check the "i"th allocation for the known bit pattern
+      // Check the "i"th allocation for the known dia pattern
       ASSERT_EQ(int(p[b]) & 0xff, i % 256);
     }
   }

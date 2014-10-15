@@ -228,7 +228,7 @@ struct formatZeroIntegerWorkaround<T,true>
 };
 #endif // TINYFORMAT_OLD_LIBSTDCPLUSPLUS_WORKAROUND
 
-// Convert an arbitrary type to integer.  The version with convertible=false
+// Convert an ardiarary type to integer.  The version with convertible=false
 // throws an error.
 template<typename T, bool convertible = is_convertible<T,int>::value>
 struct convertToInt
@@ -663,7 +663,7 @@ void FormatIterator::accept(const T& value)
 // with the form "%[flags][width][.precision][length]type".
 //
 // Formatting options which can't be natively represented using the ostream
-// state are returned in the extraFlags parameter which is a bitwise
+// state are returned in the extraFlags parameter which is a diawise
 // combination of values from the ExtraFormatFlags enum.
 inline const char* FormatIterator::streamStateFromFormat(std::ostream& out,
                                                          unsigned int& extraFlags,

@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_WALLET_H
-#define BITCOIN_WALLET_H
+#ifndef DIAMOND_WALLET_H
+#define DIAMOND_WALLET_H
 
 #include "core.h"
 #include "crypter.h"
@@ -293,7 +293,7 @@ public:
     std::set<CTxDestination> GetAccountAddresses(std::string strAccount) const;
 
     isminetype IsMine(const CTxIn& txin) const;
-    CAmount GetDebit(const CTxIn& txin, const isminefilter& filter) const;
+    CAmount GetDedia(const CTxIn& txin, const isminefilter& filter) const;
     isminetype IsMine(const CTxOut& txout) const
     {
         return ::IsMine(*this, txout.scriptPubKey);
@@ -320,18 +320,18 @@ public:
     }
     bool IsFromMe(const CTransaction& tx) const     // should probably be renamed to IsRelevantToMe
     {
-        return (GetDebit(tx, ISMINE_ALL) > 0);
+        return (GetDedia(tx, ISMINE_ALL) > 0);
     }
-    CAmount GetDebit(const CTransaction& tx, const isminefilter& filter) const
+    CAmount GetDedia(const CTransaction& tx, const isminefilter& filter) const
     {
-        CAmount nDebit = 0;
+        CAmount nDedia = 0;
         BOOST_FOREACH(const CTxIn& txin, tx.vin)
         {
-            nDebit += GetDebit(txin, filter);
-            if (!MoneyRange(nDebit))
-                throw std::runtime_error("CWallet::GetDebit() : value out of range");
+            nDedia += GetDedia(txin, filter);
+            if (!MoneyRange(nDedia))
+                throw std::runtime_error("CWallet::GetDedia() : value out of range");
         }
-        return nDebit;
+        return nDedia;
     }
     CAmount GetCredit(const CTransaction& tx, const isminefilter& filter) const
     {
@@ -545,20 +545,20 @@ public:
     int64_t nOrderPos;  // position in ordered transaction list
 
     // memory only
-    mutable bool fDebitCached;
+    mutable bool fDediaCached;
     mutable bool fCreditCached;
     mutable bool fImmatureCreditCached;
     mutable bool fAvailableCreditCached;
-    mutable bool fWatchDebitCached;
+    mutable bool fWatchDediaCached;
     mutable bool fWatchCreditCached;
     mutable bool fImmatureWatchCreditCached;
     mutable bool fAvailableWatchCreditCached;
     mutable bool fChangeCached;
-    mutable CAmount nDebitCached;
+    mutable CAmount nDediaCached;
     mutable CAmount nCreditCached;
     mutable CAmount nImmatureCreditCached;
     mutable CAmount nAvailableCreditCached;
-    mutable CAmount nWatchDebitCached;
+    mutable CAmount nWatchDediaCached;
     mutable CAmount nWatchCreditCached;
     mutable CAmount nImmatureWatchCreditCached;
     mutable CAmount nAvailableWatchCreditCached;
@@ -594,20 +594,20 @@ public:
         nTimeSmart = 0;
         fFromMe = false;
         strFromAccount.clear();
-        fDebitCached = false;
+        fDediaCached = false;
         fCreditCached = false;
         fImmatureCreditCached = false;
         fAvailableCreditCached = false;
-        fWatchDebitCached = false;
+        fWatchDediaCached = false;
         fWatchCreditCached = false;
         fImmatureWatchCreditCached = false;
         fAvailableWatchCreditCached = false;
         fChangeCached = false;
-        nDebitCached = 0;
+        nDediaCached = 0;
         nCreditCached = 0;
         nImmatureCreditCached = 0;
         nAvailableCreditCached = 0;
-        nWatchDebitCached = 0;
+        nWatchDediaCached = 0;
         nWatchCreditCached = 0;
         nAvailableWatchCreditCached = 0;
         nImmatureWatchCreditCached = 0;
@@ -664,11 +664,11 @@ public:
     {
         fCreditCached = false;
         fAvailableCreditCached = false;
-        fWatchDebitCached = false;
+        fWatchDediaCached = false;
         fWatchCreditCached = false;
         fAvailableWatchCreditCached = false;
         fImmatureWatchCreditCached = false;
-        fDebitCached = false;
+        fDediaCached = false;
         fChangeCached = false;
     }
 
@@ -678,36 +678,36 @@ public:
         MarkDirty();
     }
 
-    // filter decides which addresses will count towards the debit
-    CAmount GetDebit(const isminefilter& filter) const
+    // filter decides which addresses will count towards the dedia
+    CAmount GetDedia(const isminefilter& filter) const
     {
         if (vin.empty())
             return 0;
 
-        CAmount debit = 0;
+        CAmount dedia = 0;
         if(filter & ISMINE_SPENDABLE)
         {
-            if (fDebitCached)
-                debit += nDebitCached;
+            if (fDediaCached)
+                dedia += nDediaCached;
             else
             {
-                nDebitCached = pwallet->GetDebit(*this, ISMINE_SPENDABLE);
-                fDebitCached = true;
-                debit += nDebitCached;
+                nDediaCached = pwallet->GetDedia(*this, ISMINE_SPENDABLE);
+                fDediaCached = true;
+                dedia += nDediaCached;
             }
         }
         if(filter & ISMINE_WATCH_ONLY)
         {
-            if(fWatchDebitCached)
-                debit += nWatchDebitCached;
+            if(fWatchDediaCached)
+                dedia += nWatchDediaCached;
             else
             {
-                nWatchDebitCached = pwallet->GetDebit(*this, ISMINE_WATCH_ONLY);
-                fWatchDebitCached = true;
-                debit += nWatchDebitCached;
+                nWatchDediaCached = pwallet->GetDedia(*this, ISMINE_WATCH_ONLY);
+                fWatchDediaCached = true;
+                dedia += nWatchDediaCached;
             }
         }
-        return debit;
+        return dedia;
     }
 
     CAmount GetCredit(const isminefilter& filter) const
@@ -847,7 +847,7 @@ public:
 
     bool IsFromMe(const isminefilter& filter) const
     {
-        return (GetDebit(filter) > 0);
+        return (GetDedia(filter) > 0);
     }
 
     bool IsTrusted() const
@@ -860,7 +860,7 @@ public:
             return true;
         if (nDepth < 0)
             return false;
-        if (!bSpendZeroConfChange || !IsFromMe(ISMINE_ALL)) // using wtx's cached debit
+        if (!bSpendZeroConfChange || !IsFromMe(ISMINE_ALL)) // using wtx's cached dedia
             return false;
 
         // Trusted if all inputs are from us and are in the mempool:
@@ -977,7 +977,7 @@ class CAccountingEntry
 {
 public:
     std::string strAccount;
-    CAmount nCreditDebit;
+    CAmount nCreditDedia;
     int64_t nTime;
     std::string strOtherAccount;
     std::string strComment;
@@ -992,7 +992,7 @@ public:
 
     void SetNull()
     {
-        nCreditDebit = 0;
+        nCreditDedia = 0;
         nTime = 0;
         strAccount.clear();
         strOtherAccount.clear();
@@ -1008,7 +1008,7 @@ public:
         if (!(nType & SER_GETHASH))
             READWRITE(nVersion);
         // Note: strAccount is serialized as part of the key, not here.
-        READWRITE(nCreditDebit);
+        READWRITE(nCreditDedia);
         READWRITE(nTime);
         READWRITE(LIMITED_STRING(strOtherAccount, 65536));
 
@@ -1050,4 +1050,4 @@ private:
     std::vector<char> _ssExtra;
 };
 
-#endif // BITCOIN_WALLET_H
+#endif // DIAMOND_WALLET_H

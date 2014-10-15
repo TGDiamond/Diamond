@@ -1,4 +1,4 @@
-// Copyright (c) 2012-2014 The Bitcoin Core developers
+// Copyright (c) 2012-2014 The Diamond Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -21,7 +21,7 @@ GetResults(CWalletDB& walletdb, std::map<CAmount, CAccountingEntry>& results)
 
     results.clear();
     BOOST_CHECK(walletdb.ReorderTransactions(pwalletMain) == DB_LOAD_OK);
-    walletdb.ListAccountCreditDebit("", aes);
+    walletdb.ListAccountCreditDedia("", aes);
     BOOST_FOREACH(CAccountingEntry& ae, aes)
     {
         results[ae.nOrderPos] = ae;
@@ -39,7 +39,7 @@ BOOST_AUTO_TEST_CASE(acc_orderupgrade)
     LOCK(pwalletMain->cs_wallet);
 
     ae.strAccount = "";
-    ae.nCreditDebit = 1;
+    ae.nCreditDedia = 1;
     ae.nTime = 1333333333;
     ae.strOtherAccount = "b";
     ae.strComment = "";

@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef H_BITCOIN_SCRIPT
-#define H_BITCOIN_SCRIPT
+#ifndef H_DIAMOND_SCRIPT
+#define H_DIAMOND_SCRIPT
 
 #include "key.h"
 #include "tinyformat.h"
@@ -85,7 +85,7 @@ enum opcodetype
     OP_RIGHT = 0x81,
     OP_SIZE = 0x82,
 
-    // bit logic
+    // dia logic
     OP_INVERT = 0x83,
     OP_AND = 0x84,
     OP_OR = 0x85,
@@ -561,7 +561,7 @@ public:
         return nFound;
     }
 
-    // Pre-version-0.6, Bitcoin always counted CHECKMULTISIGs
+    // Pre-version-0.6, Diamond always counted CHECKMULTISIGs
     // as 20 sigops. With pay-to-script-hash, that changed:
     // CHECKMULTISIGs serialized in scriptSigs are
     // counted more accurately, assuming they are of the form
@@ -623,4 +623,4 @@ public:
     }
 };
 
-#endif // H_BITCOIN_SCRIPT
+#endif // H_DIAMOND_SCRIPT

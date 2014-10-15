@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_SERIALIZE_H
-#define BITCOIN_SERIALIZE_H
+#ifndef DIAMOND_SERIALIZE_H
+#define DIAMOND_SERIALIZE_H
 
 #include "allocators.h"
 
@@ -254,10 +254,10 @@ uint64_t ReadCompactSize(Stream& is)
 }
 
 // Variable-length integers: bytes are a MSB base-128 encoding of the number.
-// The high bit in each byte signifies whether another digit follows. To make
+// The high dia in each byte signifies whether another digit follows. To make
 // the encoding is one-to-one, one is subtracted from all but the last digit.
 // Thus, the byte sequence a[] with length len, where all but the last byte
-// has bit 128 set, encodes the number:
+// has dia 128 set, encodes the number:
 //
 //   (a[len-1] & 0x7F) + sum(i=1..len-1, 128^i*((a[len-i-1] & 0x7F)+1))
 //
@@ -1409,4 +1409,4 @@ public:
     }
 };
 
-#endif // BITCOIN_SERIALIZE_H
+#endif // DIAMOND_SERIALIZE_H

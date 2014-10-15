@@ -10,24 +10,24 @@
 #include <stdio.h>
 #include <string.h>
 
-template <unsigned int BITS>
-base_uint<BITS>::base_uint(const std::string& str)
+template <unsigned int DIAS>
+base_uint<DIAS>::base_uint(const std::string& str)
 {
     SetHex(str);
 }
 
-template <unsigned int BITS>
-base_uint<BITS>::base_uint(const std::vector<unsigned char>& vch)
+template <unsigned int DIAS>
+base_uint<DIAS>::base_uint(const std::vector<unsigned char>& vch)
 {
     if (vch.size() != sizeof(pn))
         throw uint_error("Converting vector of wrong size to base_uint");
     memcpy(pn, &vch[0], sizeof(pn));
 }
 
-template <unsigned int BITS>
-base_uint<BITS>& base_uint<BITS>::operator<<=(unsigned int shift)
+template <unsigned int DIAS>
+base_uint<DIAS>& base_uint<DIAS>::operator<<=(unsigned int shift)
 {
-    base_uint<BITS> a(*this);
+    base_uint<DIAS> a(*this);
     for (int i = 0; i < WIDTH; i++)
         pn[i] = 0;
     int k = shift / 32;
@@ -41,10 +41,10 @@ base_uint<BITS>& base_uint<BITS>::operator<<=(unsigned int shift)
     return *this;
 }
 
-template <unsigned int BITS>
-base_uint<BITS>& base_uint<BITS>::operator>>=(unsigned int shift)
+template <unsigned int DIAS>
+base_uint<DIAS>& base_uint<DIAS>::operator>>=(unsigned int shift)
 {
-    base_uint<BITS> a(*this);
+    base_uint<DIAS> a(*this);
     for (int i = 0; i < WIDTH; i++)
         pn[i] = 0;
     int k = shift / 32;
@@ -58,8 +58,8 @@ base_uint<BITS>& base_uint<BITS>::operator>>=(unsigned int shift)
     return *this;
 }
 
-template <unsigned int BITS>
-base_uint<BITS>& base_uint<BITS>::operator*=(uint32_t b32)
+template <unsigned int DIAS>
+base_uint<DIAS>& base_uint<DIAS>::operator*=(uint32_t b32)
 {
     uint64_t carry = 0;
     for (int i = 0; i < WIDTH; i++) {
@@ -70,10 +70,10 @@ base_uint<BITS>& base_uint<BITS>::operator*=(uint32_t b32)
     return *this;
 }
 
-template <unsigned int BITS>
-base_uint<BITS>& base_uint<BITS>::operator*=(const base_uint& b)
+template <unsigned int DIAS>
+base_uint<DIAS>& base_uint<DIAS>::operator*=(const base_uint& b)
 {
-    base_uint<BITS> a = *this;
+    base_uint<DIAS> a = *this;
     *this = 0;
     for (int j = 0; j < WIDTH; j++) {
         uint64_t carry = 0;
@@ -86,24 +86,24 @@ base_uint<BITS>& base_uint<BITS>::operator*=(const base_uint& b)
     return *this;
 }
 
-template <unsigned int BITS>
-base_uint<BITS>& base_uint<BITS>::operator/=(const base_uint& b)
+template <unsigned int DIAS>
+base_uint<DIAS>& base_uint<DIAS>::operator/=(const base_uint& b)
 {
-    base_uint<BITS> div = b;     // make a copy, so we can shift.
-    base_uint<BITS> num = *this; // make a copy, so we can subtract.
+    base_uint<DIAS> div = b;     // make a copy, so we can shift.
+    base_uint<DIAS> num = *this; // make a copy, so we can subtract.
     *this = 0;                   // the quotient.
-    int num_bits = num.bits();
-    int div_bits = div.bits();
-    if (div_bits == 0)
+    int num_dias = num.dias();
+    int div_dias = div.dias();
+    if (div_dias == 0)
         throw uint_error("Division by zero");
-    if (div_bits > num_bits) // the result is certainly 0.
+    if (div_dias > num_dias) // the result is certainly 0.
         return *this;
-    int shift = num_bits - div_bits;
+    int shift = num_dias - div_dias;
     div <<= shift; // shift so that div and nun align.
     while (shift >= 0) {
         if (num >= div) {
             num -= div;
-            pn[shift / 32] |= (1 << (shift & 31)); // set a bit of the result.
+            pn[shift / 32] |= (1 << (shift & 31)); // set a dia of the result.
         }
         div >>= 1; // shift back.
         shift--;
@@ -112,8 +112,8 @@ base_uint<BITS>& base_uint<BITS>::operator/=(const base_uint& b)
     return *this;
 }
 
-template <unsigned int BITS>
-int base_uint<BITS>::CompareTo(const base_uint<BITS>& b) const
+template <unsigned int DIAS>
+int base_uint<DIAS>::CompareTo(const base_uint<DIAS>& b) const
 {
     for (int i = WIDTH - 1; i >= 0; i--) {
         if (pn[i] < b.pn[i])
@@ -124,8 +124,8 @@ int base_uint<BITS>::CompareTo(const base_uint<BITS>& b) const
     return 0;
 }
 
-template <unsigned int BITS>
-bool base_uint<BITS>::EqualTo(uint64_t b) const
+template <unsigned int DIAS>
+bool base_uint<DIAS>::EqualTo(uint64_t b) const
 {
     for (int i = WIDTH - 1; i >= 2; i--) {
         if (pn[i])
@@ -138,8 +138,8 @@ bool base_uint<BITS>::EqualTo(uint64_t b) const
     return true;
 }
 
-template <unsigned int BITS>
-double base_uint<BITS>::getdouble() const
+template <unsigned int DIAS>
+double base_uint<DIAS>::getdouble() const
 {
     double ret = 0.0;
     double fact = 1.0;
@@ -150,8 +150,8 @@ double base_uint<BITS>::getdouble() const
     return ret;
 }
 
-template <unsigned int BITS>
-std::string base_uint<BITS>::GetHex() const
+template <unsigned int DIAS>
+std::string base_uint<DIAS>::GetHex() const
 {
     char psz[sizeof(pn) * 2 + 1];
     for (unsigned int i = 0; i < sizeof(pn); i++)
@@ -159,8 +159,8 @@ std::string base_uint<BITS>::GetHex() const
     return std::string(psz, psz + sizeof(pn) * 2);
 }
 
-template <unsigned int BITS>
-void base_uint<BITS>::SetHex(const char* psz)
+template <unsigned int DIAS>
+void base_uint<DIAS>::SetHex(const char* psz)
 {
     memset(pn, 0, sizeof(pn));
 
@@ -188,26 +188,26 @@ void base_uint<BITS>::SetHex(const char* psz)
     }
 }
 
-template <unsigned int BITS>
-void base_uint<BITS>::SetHex(const std::string& str)
+template <unsigned int DIAS>
+void base_uint<DIAS>::SetHex(const std::string& str)
 {
     SetHex(str.c_str());
 }
 
-template <unsigned int BITS>
-std::string base_uint<BITS>::ToString() const
+template <unsigned int DIAS>
+std::string base_uint<DIAS>::ToString() const
 {
     return (GetHex());
 }
 
-template <unsigned int BITS>
-unsigned int base_uint<BITS>::bits() const
+template <unsigned int DIAS>
+unsigned int base_uint<DIAS>::dias() const
 {
     for (int pos = WIDTH - 1; pos >= 0; pos--) {
         if (pn[pos]) {
-            for (int bits = 31; bits > 0; bits--) {
-                if (pn[pos] & 1 << bits)
-                    return 32 * pos + bits + 1;
+            for (int dias = 31; dias > 0; dias--) {
+                if (pn[pos] & 1 << dias)
+                    return 32 * pos + dias + 1;
             }
             return 32 * pos + 1;
         }
@@ -230,7 +230,7 @@ template std::string base_uint<160>::GetHex() const;
 template std::string base_uint<160>::ToString() const;
 template void base_uint<160>::SetHex(const char*);
 template void base_uint<160>::SetHex(const std::string&);
-template unsigned int base_uint<160>::bits() const;
+template unsigned int base_uint<160>::dias() const;
 
 // Explicit instantiations for base_uint<256>
 template base_uint<256>::base_uint(const std::string&);
@@ -247,7 +247,7 @@ template std::string base_uint<256>::GetHex() const;
 template std::string base_uint<256>::ToString() const;
 template void base_uint<256>::SetHex(const char*);
 template void base_uint<256>::SetHex(const std::string&);
-template unsigned int base_uint<256>::bits() const;
+template unsigned int base_uint<256>::dias() const;
 
 // This implementation directly uses shifts instead of going
 // through an intermediate MPI representation.
@@ -273,7 +273,7 @@ uint256& uint256::SetCompact(uint32_t nCompact, bool* pfNegative, bool* pfOverfl
 
 uint32_t uint256::GetCompact(bool fNegative) const
 {
-    int nSize = (bits() + 7) / 8;
+    int nSize = (dias() + 7) / 8;
     uint32_t nCompact = 0;
     if (nSize <= 3) {
         nCompact = GetLow64() << 8 * (3 - nSize);
@@ -281,7 +281,7 @@ uint32_t uint256::GetCompact(bool fNegative) const
         uint256 bn = *this >> 8 * (nSize - 3);
         nCompact = bn.GetLow64();
     }
-    // The 0x00800000 bit denotes the sign.
+    // The 0x00800000 dia denotes the sign.
     // Thus, if it is already set, divide the mantissa by 256 and increase the exponent.
     if (nCompact & 0x00800000) {
         nCompact >>= 8;

@@ -1,0 +1,27 @@
+# /etc/conf.d/diamondd: config file for /etc/init.d/diamondd
+
+# Config file location
+#DIAMONDD_CONFIGFILE="/etc/diamond/diamond.conf"
+
+# What directory to write pidfile to?  (created and owned by $DIAMONDD_USER)
+#DIAMONDD_PIDDIR="/var/run/diamondd"
+
+# What filename to give the pidfile
+#DIAMONDD_PIDFILE="${DIAMONDD_PIDDIR}/diamondd.pid"
+
+# Where to write diamondd data (be mindful that the blockchain is large)
+#DIAMONDD_DATADIR="/var/lib/diamondd"
+
+# User and group to own diamondd process
+#DIAMONDD_USER="diamond"
+#DIAMONDD_GROUP="diamond"
+
+# Path to diamondd executable
+#DIAMONDD_BIN="/usr/bin/diamondd"
+
+# Nice value to run diamondd under
+#DIAMONDD_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+DIAMONDD_OPTS="-disablewallet"
+

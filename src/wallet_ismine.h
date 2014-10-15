@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef H_BITCOIN_WALLET_ISMINE
-#define H_BITCOIN_WALLET_ISMINE
+#ifndef H_DIAMOND_WALLET_ISMINE
+#define H_DIAMOND_WALLET_ISMINE
 
 #include "key.h"
 #include "script/standard.h"
@@ -20,10 +20,10 @@ enum isminetype
     ISMINE_SPENDABLE = 2,
     ISMINE_ALL = ISMINE_WATCH_ONLY | ISMINE_SPENDABLE
 };
-/** used for bitflags of isminetype */
+/** used for diaflags of isminetype */
 typedef uint8_t isminefilter;
 
 isminetype IsMine(const CKeyStore& keystore, const CScript& scriptPubKey);
 isminetype IsMine(const CKeyStore& keystore, const CTxDestination& dest);
 
-#endif // H_BITCOIN_WALLET_ISMINE
+#endif // H_DIAMOND_WALLET_ISMINE

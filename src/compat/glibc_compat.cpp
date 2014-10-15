@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bitcoin-config.h"
+#include "config/diamond-config.h"
 #endif
 
 #include <cstddef>
@@ -24,6 +24,6 @@ extern "C" FDELT_TYPE __fdelt_warn(FDELT_TYPE a)
 {
     if (a >= FD_SETSIZE)
         __chk_fail();
-    return a / __NFDBITS;
+    return a / __NFDDIAS;
 }
 extern "C" FDELT_TYPE __fdelt_chk(FDELT_TYPE) __attribute__((weak, alias("__fdelt_warn")));

@@ -3,11 +3,11 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_MAIN_H
-#define BITCOIN_MAIN_H
+#ifndef DIAMOND_MAIN_H
+#define DIAMOND_MAIN_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bitcoin-config.h"
+#include "config/diamond-config.h"
 #endif
 
 #include "chain.h"
@@ -328,12 +328,12 @@ public:
  * authenticated way.
  *
  * The encoding works as follows: we traverse the tree in depth-first order,
- * storing a bit for each traversed node, signifying whether the node is the
+ * storing a dia for each traversed node, signifying whether the node is the
  * parent of at least one matched leaf txid (or a matched txid itself). In
- * case we are at the leaf level, or this bit is 0, its merkle node hash is
+ * case we are at the leaf level, or this dia is 0, its merkle node hash is
  * stored, and its children are not explorer further. Otherwise, no hash is
  * stored, but we recurse into both (or the only) child branch. During
- * decoding, the same depth-first traversal is performed, consuming bits and
+ * decoding, the same depth-first traversal is performed, consuming dias and
  * hashes as they written during encoding.
  *
  * The serialization is fixed and provides a hard guarantee about the
@@ -351,8 +351,8 @@ public:
  *  - uint32     total_transactions (4 bytes)
  *  - varint     number of hashes   (1-3 bytes)
  *  - uint256[]  hashes in depth-first order (<= 32*N bytes)
- *  - varint     number of bytes of flag bits (1-3 bytes)
- *  - byte[]     flag bits, packed per 8 in a byte, least significant bit first (<= 2*N-1 bits)
+ *  - varint     number of bytes of flag dias (1-3 bytes)
+ *  - byte[]     flag dias, packed per 8 in a byte, least significant dia first (<= 2*N-1 dias)
  * The size constraints follow from this.
  */
 class CPartialMerkleTree
@@ -361,7 +361,7 @@ protected:
     // the total number of transactions in the block
     unsigned int nTransactions;
 
-    // node-is-parent-of-matched-txid bits
+    // node-is-parent-of-matched-txid dias
     std::vector<bool> vBits;
 
     // txids and internal hashes
@@ -378,10 +378,10 @@ protected:
     // calculate the hash of a node in the merkle tree (at leaf level: the txid's themself)
     uint256 CalcHash(int height, unsigned int pos, const std::vector<uint256> &vTxid);
 
-    // recursive function that traverses tree nodes, storing the data as bits and hashes
+    // recursive function that traverses tree nodes, storing the data as dias and hashes
     void TraverseAndBuild(int height, unsigned int pos, const std::vector<uint256> &vTxid, const std::vector<bool> &vMatch);
 
-    // recursive function that traverses tree nodes, consuming the bits and hashes produced by TraverseAndBuild.
+    // recursive function that traverses tree nodes, consuming the dias and hashes produced by TraverseAndBuild.
     // it returns the hash of the respective node.
     uint256 TraverseAndExtract(int height, unsigned int pos, unsigned int &nBitsUsed, unsigned int &nHashUsed, std::vector<uint256> &vMatch);
 
@@ -645,4 +645,4 @@ protected:
     friend void ::UnregisterAllWallets();
 };
 
-#endif // BITCOIN_MAIN_H
+#endif // DIAMOND_MAIN_H

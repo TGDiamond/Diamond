@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_WALLETDB_H
-#define BITCOIN_WALLETDB_H
+#ifndef DIAMOND_WALLETDB_H
+#define DIAMOND_WALLETDB_H
 
 #include "amount.h"
 #include "db.h"
@@ -120,8 +120,8 @@ public:
     bool EraseDestData(const std::string &address, const std::string &key);
 
     bool WriteAccountingEntry(const CAccountingEntry& acentry);
-    CAmount GetAccountCreditDebit(const std::string& strAccount);
-    void ListAccountCreditDebit(const std::string& strAccount, std::list<CAccountingEntry>& acentries);
+    CAmount GetAccountCreditDedia(const std::string& strAccount);
+    void ListAccountCreditDedia(const std::string& strAccount, std::list<CAccountingEntry>& acentries);
 
     DBErrors ReorderTransactions(CWallet* pwallet);
     DBErrors LoadWallet(CWallet* pwallet);
@@ -139,4 +139,4 @@ private:
 
 bool BackupWallet(const CWallet& wallet, const std::string& strDest);
 
-#endif // BITCOIN_WALLETDB_H
+#endif // DIAMOND_WALLETDB_H

@@ -1,0 +1,86 @@
+#!/sbin/runscript
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/diamond/.diamond" ]; then
+	DIAMONDD_DEFAULT_DATADIR="/var/lib/diamond/.diamond"
+else
+	DIAMONDD_DEFAULT_DATADIR="/var/lib/diamondd"
+fi
+
+DIAMONDD_CONFIGFILE=${DIAMONDD_CONFIGFILE:-/etc/diamond/diamond.conf}
+DIAMONDD_PIDDIR=${DIAMONDD_PIDDIR:-/var/run/diamondd}
+DIAMONDD_PIDFILE=${DIAMONDD_PIDFILE:-${DIAMONDD_PIDDIR}/diamondd.pid}
+DIAMONDD_DATADIR=${DIAMONDD_DATADIR:-${DIAMONDD_DEFAULT_DATADIR}}
+DIAMONDD_USER=${DIAMONDD_USER:-diamond}
+DIAMONDD_GROUP=${DIAMONDD_GROUP:-diamond}
+DIAMONDD_BIN=${DIAMONDD_BIN:-/usr/bin/diamondd}
+
+name="Diamond Core Daemon"
+description="Diamond crypto-currency p2p network daemon"
+
+command="/usr/bin/diamondd"
+command_args="-pid=\"${DIAMONDD_PIDFILE}\" \
+		-conf=\"${DIAMONDD_CONFIGFILE}\" \
+		-datadir=\"${DIAMONDD_DATADIR}\" \
+		-daemon \
+		${DIAMONDD_OPTS}"
+
+required_files="${DIAMONDD_CONFIGFILE}"
+start_stop_daemon_args="-u ${DIAMONDD_USER} \
+			-N ${DIAMONDD_NICE:-0} -w 2000"
+pidfile="${DIAMONDD_PIDFILE}"
+retry=60
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${DIAMONDD_USER}:${DIAMONDD_GROUP}" \
+	"${DIAMONDD_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${DIAMONDD_USER}:${DIAMONDD_GROUP}" \
+	"${DIAMONDD_PIDDIR}"
+
+	checkpath -f \
+	-o ${DIAMONDD_USER}:${DIAMONDD_GROUP} \
+	-m 0660 \
+	${DIAMONDD_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${DIAMONDD_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run diamondd."
+		eerror "The setting must appear in ${DIAMONDD_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following"
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is also recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"Diamond Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}

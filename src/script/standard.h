@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef H_BITCOIN_SCRIPT_STANDARD
-#define H_BITCOIN_SCRIPT_STANDARD
+#ifndef H_DIAMOND_SCRIPT_STANDARD
+#define H_DIAMOND_SCRIPT_STANDARD
 
 #include "script/script.h"
 #include "script/interpreter.h"
@@ -55,7 +55,7 @@ public:
  *  * CNoDestination: no destination set
  *  * CKeyID: TX_PUBKEYHASH destination
  *  * CScriptID: TX_SCRIPTHASH destination
- *  A CTxDestination is the internal data type encoded in a CBitcoinAddress
+ *  A CTxDestination is the internal data type encoded in a CDiamondAddress
  */
 typedef boost::variant<CNoDestination, CKeyID, CScriptID> CTxDestination;
 
@@ -70,4 +70,4 @@ bool ExtractDestinations(const CScript& scriptPubKey, txnouttype& typeRet, std::
 CScript GetScriptForDestination(const CTxDestination& dest);
 CScript GetScriptForMultisig(int nRequired, const std::vector<CPubKey>& keys);
 
-#endif // H_BITCOIN_SCRIPT_STANDARD
+#endif // H_DIAMOND_SCRIPT_STANDARD

@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_UI_INTERFACE_H
-#define BITCOIN_UI_INTERFACE_H
+#ifndef DIAMOND_UI_INTERFACE_H
+#define DIAMOND_UI_INTERFACE_H
 
 #include <stdint.h>
 #include <string>
@@ -109,4 +109,4 @@ inline std::string _(const char* psz)
     return rv ? (*rv) : psz;
 }
 
-#endif // BITCOIN_UI_INTERFACE_H
+#endif // DIAMOND_UI_INTERFACE_H

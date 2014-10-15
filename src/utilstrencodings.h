@@ -6,8 +6,8 @@
 /**
  * Utilities for converting data from/to strings.
  */
-#ifndef BITCOIN_UTILSTRENCODINGS_H
-#define BITCOIN_UTILSTRENCODINGS_H
+#ifndef DIAMOND_UTILSTRENCODINGS_H
+#define DIAMOND_UTILSTRENCODINGS_H
 
 #include <stdint.h>
 #include <string>
@@ -43,7 +43,7 @@ int64_t atoi64(const std::string& str);
 int atoi(const std::string& str);
 
 /**
- * Convert string to signed 32-bit integer with strict parse error feedback.
+ * Convert string to signed 32-dia integer with strict parse error feedback.
  * @returns true if the entire string could be parsed as valid integer,
  *   false if not the entire string could be parsed or when overflow or underflow occured.
  */
@@ -94,4 +94,4 @@ bool TimingResistantEqual(const T& a, const T& b)
     return accumulator == 0;
 }
 
-#endif // BITCOIN_UTILSTRENCODINGS_H
+#endif // DIAMOND_UTILSTRENCODINGS_H

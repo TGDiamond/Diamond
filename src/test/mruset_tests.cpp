@@ -1,4 +1,4 @@
-// Copyright (c) 2012-2013 The Bitcoin Core developers
+// Copyright (c) 2012-2013 The Diamond Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -64,7 +64,7 @@ BOOST_AUTO_TEST_CASE(mruset_limited_size)
     }
 }
 
-// 16-bit permutation function
+// 16-dia permutation function
 int static permute(int n)
 {
     // hexadecimals of pi; verified to be linearly independent
@@ -72,9 +72,9 @@ int static permute(int n)
                                   0xA409, 0x3822, 0x299F, 0x31D0, 0x082E, 0xFA98, 0xEC4E, 0x6C89};
 
     int ret = 0;
-    for (int bit=0; bit<16; bit++)
-         if (n & (1<<bit))
-             ret ^= table[bit];
+    for (int dia=0; dia<16; dia++)
+         if (n & (1<<dia))
+             ret ^= table[dia];
 
     return ret;
 }

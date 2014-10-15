@@ -166,7 +166,7 @@
 0x2c08c452 # 82.196.8.44
 0xc7fd0652 # 82.6.253.199
 0x7604f8ce # 206.248.4.118
-0xffb38332 # 50.131.179.255
+0xffb34408 # 50.131.179.255
 0xa4c2efd5 # 213.239.194.164
 0xe9614018 # 24.64.97.233
 0xab49e557 # 87.229.73.171
@@ -604,26 +604,26 @@
 0x6b5f4bc0 # 192.75.95.107
 
 # Onion nodes
-bitcoinostk4e4re.onion:8333
-5k4vwyy5stro33fb.onion:8333
-zy3kdqowmrb7xm7h.onion:8333
-e3tn727fywnioxrc.onion:8333
-kjy2eqzk4zwi5zd3.onion:8333
-pt2awtcs2ulm75ig.onion:8333
-td7tgof3imei3fm6.onion:8333
-czsbwh4pq4mh3izl.onion:8333
-xdnigz4qn5dbbw2t.onion:8333
+diamondostk4e4re.onion:4406
+5k4vwyy5stro33fb.onion:4406
+zy3kdqowmrb7xm7h.onion:4406
+e3tn727fywnioxrc.onion:4406
+kjy2eqzk4zwi5zd3.onion:4406
+pt2awtcs2ulm75ig.onion:4406
+td7tgof3imei3fm6.onion:4406
+czsbwh4pq4mh3izl.onion:4406
+xdnigz4qn5dbbw2t.onion:4406
 ymnsfdejmc74vcfb.onion:7033
-jxrvw5iqizppbgml.onion:8333
-bk5ejfe56xakvtkk.onion:8333
-szsm43ou7otwwyfv.onion:8333
-5ghqw4wj6hpgfvdg.onion:8333
-evolynhit7shzeet.onion:8333
-4crhf372poejlc44.onion:8333
-tfu4kqfhsw5slqp2.onion:8333
-i2r5tbaizb75h26f.onion:8333
-btcnet3utgzyz2bf.onion:8333
-vso3r6cmjoomhhgg.onion:8333
-pqosrh6wfaucet32.onion:8333
-zy3kdqowmrb7xm7h.onion:8333
+jxrvw5iqizppbgml.onion:4406
+bk5ejfe56xakvtkk.onion:4406
+szsm43ou7otwwyfv.onion:4406
+5ghqw4wj6hpgfvdg.onion:4406
+evolynhit7shzeet.onion:4406
+4crhf372poejlc44.onion:4406
+tfu4kqfhsw5slqp2.onion:4406
+i2r5tbaizb75h26f.onion:4406
+tgdnet3utgzyz2bf.onion:4406
+vso3r6cmjoomhhgg.onion:4406
+pqosrh6wfaucet32.onion:4406
+zy3kdqowmrb7xm7h.onion:4406
 r4de4zf4lyniu4mx.onion:8444

@@ -8,8 +8,8 @@
 
 #include <assert.h>
 
-// calculate number of bytes for the bitmask, and its number of non-zero bytes
-// each bit in the bitmask represents the availability of one output, but the
+// calculate number of bytes for the diamask, and its number of non-zero bytes
+// each dia in the diamask represents the availability of one output, but the
 // availabilities of the first two outputs are encoded separately
 void CCoins::CalcMaskSize(unsigned int &nBytes, unsigned int &nNonzeroBytes) const {
     unsigned int nLastUsedByte = 0;

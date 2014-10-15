@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_RANDOM_H
-#define BITCOIN_RANDOM_H
+#ifndef DIAMOND_RANDOM_H
+#define DIAMOND_RANDOM_H
 
 #include "uint256.h"
 
@@ -33,7 +33,7 @@ void seed_insecure_rand(bool fDeterministic = false);
 /**
  * MWC RNG of George Marsaglia
  * This is intended to be fast. It has a period of 2^59.3, though the
- * least significant 16 bits only have a period of about 2^30.1.
+ * least significant 16 dias only have a period of about 2^30.1.
  *
  * @return random value
  */
@@ -46,4 +46,4 @@ static inline uint32_t insecure_rand(void)
     return (insecure_rand_Rw << 16) + insecure_rand_Rz;
 }
 
-#endif // BITCOIN_RANDOM_H
+#endif // DIAMOND_RANDOM_H

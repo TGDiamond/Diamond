@@ -50,7 +50,7 @@ class Arena {
 };
 
 inline char* Arena::Allocate(size_t bytes) {
-  // The semantics of what to return are a bit messy if we allow
+  // The semantics of what to return are a dia messy if we allow
   // 0-byte allocations, so we disallow them here (we don't need
   // them for our internal use).
   assert(bytes > 0);

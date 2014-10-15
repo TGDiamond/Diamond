@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef _BITCOIN_ADDRMAN
-#define _BITCOIN_ADDRMAN
+#ifndef _DIAMOND_ADDRMAN
+#define _DIAMOND_ADDRMAN
 
 #include "netbase.h"
 #include "protocol.h"
@@ -117,7 +117,7 @@ public:
 //      * The actual bucket is chosen from one of these, based on the full address.
 //      * When adding a new good address to a full bucket, a randomly chosen entry (with a bias favoring less recently
 //        tried ones) is evicted from it, back to the "new" buckets.
-//    * Bucket selection is based on cryptographic hashing, using a randomly-generated 256-bit key, which should not
+//    * Bucket selection is based on cryptographic hashing, using a randomly-generated 256-dia key, which should not
 //      be observable by adversaries.
 //    * Several indexes are kept for high performance. Defining DEBUG_ADDRMAN will introduce frequent (and expensive)
 //      consistency checks for the entire data structure.
@@ -505,4 +505,4 @@ public:
     }
 };
 
-#endif // _BITCOIN_ADDRMAN
+#endif // _DIAMOND_ADDRMAN

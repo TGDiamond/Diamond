@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_COINS_H
-#define BITCOIN_COINS_H
+#ifndef DIAMOND_COINS_H
+#define DIAMOND_COINS_H
 
 #include "core.h"
 #include "serialize.h"
@@ -21,16 +21,16 @@
  * Serialized format:
  * - VARINT(nVersion)
  * - VARINT(nCode)
- * - unspentness bitvector, for vout[2] and further; least significant byte first
+ * - unspentness diavector, for vout[2] and further; least significant byte first
  * - the non-spent CTxOuts (via CTxOutCompressor)
  * - VARINT(nHeight)
  *
  * The nCode value consists of:
- * - bit 1: IsCoinBase()
- * - bit 2: vout[0] is not spent
- * - bit 4: vout[1] is not spent
- * - The higher bits encode N, the number of non-zero bytes in the following bitvector.
- *   - In case both bit 2 and bit 4 are unset, they encode N-1, as there must be at
+ * - dia 1: IsCoinBase()
+ * - dia 2: vout[0] is not spent
+ * - dia 4: vout[1] is not spent
+ * - The higher dias encode N, the number of non-zero bytes in the following diavector.
+ *   - In case both dia 2 and dia 4 are unset, they encode N-1, as there must be at
  *     least one non-spent output).
  *
  * Example: 0104835800816115944e077fe7c803cfa57f29b36bf87c1d358bb85e
@@ -39,10 +39,10 @@
  *    version   code             vout[1]                  height
  *
  *    - version = 1
- *    - code = 4 (vout[1] is not spent, and 0 non-zero bytes of bitvector follow)
- *    - unspentness bitvector: as 0 non-zero bytes follow, it has length 0
+ *    - code = 4 (vout[1] is not spent, and 0 non-zero bytes of diavector follow)
+ *    - unspentness diavector: as 0 non-zero bytes follow, it has length 0
  *    - vout[1]: 835800816115944e077fe7c803cfa57f29b36bf87c1d35
- *               * 8358: compact amount representation for 60000000000 (600 BTC)
+ *               * 8358: compact amount representation for 60000000000 (600 TGD)
  *               * 00: special txout type pay-to-pubkey-hash
  *               * 816115944e077fe7c803cfa57f29b36bf87c1d35: address uint160
  *    - height = 203998
@@ -55,14 +55,14 @@
  *
  *  - version = 1
  *  - code = 9 (coinbase, neither vout[0] or vout[1] are unspent,
- *                2 (1, +1 because both bit 2 and bit 4 are unset) non-zero bitvector bytes follow)
- *  - unspentness bitvector: bits 2 (0x04) and 14 (0x4000) are set, so vout[2+2] and vout[14+2] are unspent
+ *                2 (1, +1 because both dia 2 and dia 4 are unset) non-zero diavector bytes follow)
+ *  - unspentness diavector: dias 2 (0x04) and 14 (0x4000) are set, so vout[2+2] and vout[14+2] are unspent
  *  - vout[4]: 86ef97d5790061b01caab50f1b8e9c50a5057eb43c2d9563a4ee
- *             * 86ef97d579: compact amount representation for 234925952 (2.35 BTC)
+ *             * 86ef97d579: compact amount representation for 234925952 (2.35 TGD)
  *             * 00: special txout type pay-to-pubkey-hash
  *             * 61b01caab50f1b8e9c50a5057eb43c2d9563a4ee: address uint160
  *  - vout[16]: bbd123008c988f1a4a4de2161e0f50aac7f17e7f9555caa4
- *              * bbd123: compact amount representation for 110397 (0.001 BTC)
+ *              * bbd123: compact amount representation for 110397 (0.001 TGD)
  *              * 00: special txout type pay-to-pubkey-hash
  *              * 8c988f1a4a4de2161e0f50aac7f17e7f9555caa4: address uint160
  *  - height = 120891
@@ -161,7 +161,7 @@ public:
         nSize += ::GetSerializeSize(VARINT(this->nVersion), nType, nVersion);
         // size of header code
         nSize += ::GetSerializeSize(VARINT(nCode), nType, nVersion);
-        // spentness bitmask
+        // spentness diamask
         nSize += nMaskSize;
         // txouts themself
         for (unsigned int i = 0; i < vout.size(); i++)
@@ -184,7 +184,7 @@ public:
         ::Serialize(s, VARINT(this->nVersion), nType, nVersion);
         // header code
         ::Serialize(s, VARINT(nCode), nType, nVersion);
-        // spentness bitmask
+        // spentness diamask
         for (unsigned int b = 0; b<nMaskSize; b++) {
             unsigned char chAvail = 0;
             for (unsigned int i = 0; i < 8 && 2+b*8+i < vout.size(); i++)
@@ -213,7 +213,7 @@ public:
         vAvail[0] = (nCode & 2) != 0;
         vAvail[1] = (nCode & 4) != 0;
         unsigned int nMaskCode = (nCode / 8) + ((nCode & 6) != 0 ? 0 : 1);
-        // spentness bitmask
+        // spentness diamask
         while (nMaskCode > 0) {
             unsigned char chAvail = 0;
             ::Unserialize(s, chAvail, nType, nVersion);
@@ -263,7 +263,7 @@ private:
 
 public:
     CCoinsKeyHasher();
-    // This *must* return size_t. With Boost 1.46 on 32-bit systems the
+    // This *must* return size_t. With Boost 1.46 on 32-dia systems the
     // unordered_map will behave unpredictably if the custom hasher returns a
     // uint64_t, resulting in failures when syncing the chain (#4634).
     size_t operator()(const uint256& key) const {
@@ -403,7 +403,7 @@ public:
     // Calculate the size of the cache (in number of transactions)
     unsigned int GetCacheSize() const;
 
-    /** Amount of bitcoins coming in to a transaction
+    /** Amount of diamonds coming in to a transaction
         Note that lightweight clients may not know anything besides the hash of previous transactions,
         so may not be able to calculate this.
 
@@ -427,4 +427,4 @@ private:
     CCoinsMap::const_iterator FetchCoins(const uint256 &txid) const;
 };
 
-#endif // BITCOIN_COINS_H
+#endif // DIAMOND_COINS_H

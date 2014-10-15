@@ -1,4 +1,4 @@
-// Copyright (c) 2012-2013 The Bitcoin Core developers
+// Copyright (c) 2012-2013 The Diamond Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,12 +15,12 @@ using namespace std;
 class CPartialMerkleTreeTester : public CPartialMerkleTree
 {
 public:
-    // flip one bit in one of the hashes - this should break the authentication
+    // flip one dia in one of the hashes - this should break the authentication
     void Damage() {
         unsigned int n = rand() % vHash.size();
-        int bit = rand() % 256;
+        int dia = rand() % 256;
         uint256 &hash = vHash[n];
-        hash ^= ((uint256)1 << bit);
+        hash ^= ((uint256)1 << dia);
     }
 };
 
@@ -90,7 +90,7 @@ BOOST_AUTO_TEST_CASE(pmt_test1)
             // check that it contains the matched transactions (in the same order!)
             BOOST_CHECK(vMatchTxid1 == vMatchTxid2);
 
-            // check that random bit flips break the authentication
+            // check that random dia flips break the authentication
             for (int j=0; j<4; j++) {
                 CPartialMerkleTreeTester pmt3(pmt2);
                 pmt3.Damage();

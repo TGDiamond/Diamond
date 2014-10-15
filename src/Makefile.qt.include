@@ -1,79 +1,79 @@
-bin_PROGRAMS += qt/bitcoin-qt
-noinst_LIBRARIES += qt/libbitcoinqt.a
+bin_PROGRAMS += qt/diamond-qt
+noinst_LIBRARIES += qt/libdiamondqt.a
 
-# bitcoin qt core #
+# diamond qt core #
 QT_TS = \
-  qt/locale/bitcoin_ach.ts \
-  qt/locale/bitcoin_af_ZA.ts \
-  qt/locale/bitcoin_ar.ts \
-  qt/locale/bitcoin_be_BY.ts \
-  qt/locale/bitcoin_bg.ts \
-  qt/locale/bitcoin_bs.ts \
-  qt/locale/bitcoin_ca_ES.ts \
-  qt/locale/bitcoin_ca.ts \
-  qt/locale/bitcoin_ca@valencia.ts \
-  qt/locale/bitcoin_cmn.ts \
-  qt/locale/bitcoin_cs.ts \
-  qt/locale/bitcoin_cy.ts \
-  qt/locale/bitcoin_da.ts \
-  qt/locale/bitcoin_de.ts \
-  qt/locale/bitcoin_el_GR.ts \
-  qt/locale/bitcoin_en.ts \
-  qt/locale/bitcoin_eo.ts \
-  qt/locale/bitcoin_es_CL.ts \
-  qt/locale/bitcoin_es_DO.ts \
-  qt/locale/bitcoin_es_MX.ts \
-  qt/locale/bitcoin_es.ts \
-  qt/locale/bitcoin_es_UY.ts \
-  qt/locale/bitcoin_et.ts \
-  qt/locale/bitcoin_eu_ES.ts \
-  qt/locale/bitcoin_fa_IR.ts \
-  qt/locale/bitcoin_fa.ts \
-  qt/locale/bitcoin_fi.ts \
-  qt/locale/bitcoin_fr_CA.ts \
-  qt/locale/bitcoin_fr.ts \
-  qt/locale/bitcoin_gl.ts \
-  qt/locale/bitcoin_gu_IN.ts \
-  qt/locale/bitcoin_he.ts \
-  qt/locale/bitcoin_hi_IN.ts \
-  qt/locale/bitcoin_hr.ts \
-  qt/locale/bitcoin_hu.ts \
-  qt/locale/bitcoin_id_ID.ts \
-  qt/locale/bitcoin_it.ts \
-  qt/locale/bitcoin_ja.ts \
-  qt/locale/bitcoin_ka.ts \
-  qt/locale/bitcoin_kk_KZ.ts \
-  qt/locale/bitcoin_ko_KR.ts \
-  qt/locale/bitcoin_ky.ts \
-  qt/locale/bitcoin_la.ts \
-  qt/locale/bitcoin_lt.ts \
-  qt/locale/bitcoin_lv_LV.ts \
-  qt/locale/bitcoin_mn.ts \
-  qt/locale/bitcoin_ms_MY.ts \
-  qt/locale/bitcoin_nb.ts \
-  qt/locale/bitcoin_nl.ts \
-  qt/locale/bitcoin_pam.ts \
-  qt/locale/bitcoin_pl.ts \
-  qt/locale/bitcoin_pt_BR.ts \
-  qt/locale/bitcoin_pt_PT.ts \
-  qt/locale/bitcoin_ro_RO.ts \
-  qt/locale/bitcoin_ru.ts \
-  qt/locale/bitcoin_sah.ts \
-  qt/locale/bitcoin_sk.ts \
-  qt/locale/bitcoin_sl_SI.ts \
-  qt/locale/bitcoin_sq.ts \
-  qt/locale/bitcoin_sr.ts \
-  qt/locale/bitcoin_sv.ts \
-  qt/locale/bitcoin_th_TH.ts \
-  qt/locale/bitcoin_tr.ts \
-  qt/locale/bitcoin_uk.ts \
-  qt/locale/bitcoin_ur_PK.ts \
-  qt/locale/bitcoin_uz@Cyrl.ts \
-  qt/locale/bitcoin_vi.ts \
-  qt/locale/bitcoin_vi_VN.ts \
-  qt/locale/bitcoin_zh_CN.ts \
-  qt/locale/bitcoin_zh_HK.ts \
-  qt/locale/bitcoin_zh_TW.ts
+  qt/locale/diamond_ach.ts \
+  qt/locale/diamond_af_ZA.ts \
+  qt/locale/diamond_ar.ts \
+  qt/locale/diamond_be_BY.ts \
+  qt/locale/diamond_bg.ts \
+  qt/locale/diamond_bs.ts \
+  qt/locale/diamond_ca_ES.ts \
+  qt/locale/diamond_ca.ts \
+  qt/locale/diamond_ca@valencia.ts \
+  qt/locale/diamond_cmn.ts \
+  qt/locale/diamond_cs.ts \
+  qt/locale/diamond_cy.ts \
+  qt/locale/diamond_da.ts \
+  qt/locale/diamond_de.ts \
+  qt/locale/diamond_el_GR.ts \
+  qt/locale/diamond_en.ts \
+  qt/locale/diamond_eo.ts \
+  qt/locale/diamond_es_CL.ts \
+  qt/locale/diamond_es_DO.ts \
+  qt/locale/diamond_es_MX.ts \
+  qt/locale/diamond_es.ts \
+  qt/locale/diamond_es_UY.ts \
+  qt/locale/diamond_et.ts \
+  qt/locale/diamond_eu_ES.ts \
+  qt/locale/diamond_fa_IR.ts \
+  qt/locale/diamond_fa.ts \
+  qt/locale/diamond_fi.ts \
+  qt/locale/diamond_fr_CA.ts \
+  qt/locale/diamond_fr.ts \
+  qt/locale/diamond_gl.ts \
+  qt/locale/diamond_gu_IN.ts \
+  qt/locale/diamond_he.ts \
+  qt/locale/diamond_hi_IN.ts \
+  qt/locale/diamond_hr.ts \
+  qt/locale/diamond_hu.ts \
+  qt/locale/diamond_id_ID.ts \
+  qt/locale/diamond_it.ts \
+  qt/locale/diamond_ja.ts \
+  qt/locale/diamond_ka.ts \
+  qt/locale/diamond_kk_KZ.ts \
+  qt/locale/diamond_ko_KR.ts \
+  qt/locale/diamond_ky.ts \
+  qt/locale/diamond_la.ts \
+  qt/locale/diamond_lt.ts \
+  qt/locale/diamond_lv_LV.ts \
+  qt/locale/diamond_mn.ts \
+  qt/locale/diamond_ms_MY.ts \
+  qt/locale/diamond_nb.ts \
+  qt/locale/diamond_nl.ts \
+  qt/locale/diamond_pam.ts \
+  qt/locale/diamond_pl.ts \
+  qt/locale/diamond_pt_BR.ts \
+  qt/locale/diamond_pt_PT.ts \
+  qt/locale/diamond_ro_RO.ts \
+  qt/locale/diamond_ru.ts \
+  qt/locale/diamond_sah.ts \
+  qt/locale/diamond_sk.ts \
+  qt/locale/diamond_sl_SI.ts \
+  qt/locale/diamond_sq.ts \
+  qt/locale/diamond_sr.ts \
+  qt/locale/diamond_sv.ts \
+  qt/locale/diamond_th_TH.ts \
+  qt/locale/diamond_tr.ts \
+  qt/locale/diamond_uk.ts \
+  qt/locale/diamond_ur_PK.ts \
+  qt/locale/diamond_uz@Cyrl.ts \
+  qt/locale/diamond_vi.ts \
+  qt/locale/diamond_vi_VN.ts \
+  qt/locale/diamond_zh_CN.ts \
+  qt/locale/diamond_zh_HK.ts \
+  qt/locale/diamond_zh_TW.ts
 
 QT_FORMS_UI = \
   qt/forms/addressbookpage.ui \
@@ -97,10 +97,10 @@ QT_MOC_CPP = \
   qt/moc_addressbookpage.cpp \
   qt/moc_addresstablemodel.cpp \
   qt/moc_askpassphrasedialog.cpp \
-  qt/moc_bitcoinaddressvalidator.cpp \
-  qt/moc_bitcoinamountfield.cpp \
-  qt/moc_bitcoingui.cpp \
-  qt/moc_bitcoinunits.cpp \
+  qt/moc_diamondaddressvalidator.cpp \
+  qt/moc_diamondamountfield.cpp \
+  qt/moc_diamondgui.cpp \
+  qt/moc_diamondunits.cpp \
   qt/moc_clientmodel.cpp \
   qt/moc_coincontroldialog.cpp \
   qt/moc_coincontroltreewidget.cpp \
@@ -139,34 +139,34 @@ QT_MOC_CPP = \
   qt/moc_walletmodel.cpp \
   qt/moc_walletview.cpp
 
-BITCOIN_MM = \
+DIAMOND_MM = \
   qt/macdockiconhandler.mm \
   qt/macnotificationhandler.mm
 
 QT_MOC = \
-  qt/bitcoin.moc \
-  qt/bitcoinamountfield.moc \
+  qt/diamond.moc \
+  qt/diamondamountfield.moc \
   qt/intro.moc \
   qt/overviewpage.moc \
   qt/rpcconsole.moc
 
-QT_QRC_CPP = qt/qrc_bitcoin.cpp
-QT_QRC = qt/bitcoin.qrc
-QT_QRC_LOCALE_CPP = qt/qrc_bitcoin_locale.cpp
-QT_QRC_LOCALE = qt/bitcoin_locale.qrc
+QT_QRC_CPP = qt/qrc_diamond.cpp
+QT_QRC = qt/diamond.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_diamond_locale.cpp
+QT_QRC_LOCALE = qt/diamond_locale.qrc
 
 PROTOBUF_CC = qt/paymentrequest.pb.cc
 PROTOBUF_H = qt/paymentrequest.pb.h
 PROTOBUF_PROTO = qt/paymentrequest.proto
 
-BITCOIN_QT_H = \
+DIAMOND_QT_H = \
   qt/addressbookpage.h \
   qt/addresstablemodel.h \
   qt/askpassphrasedialog.h \
-  qt/bitcoinaddressvalidator.h \
-  qt/bitcoinamountfield.h \
-  qt/bitcoingui.h \
-  qt/bitcoinunits.h \
+  qt/diamondaddressvalidator.h \
+  qt/diamondamountfield.h \
+  qt/diamondgui.h \
+  qt/diamondunits.h \
   qt/clientmodel.h \
   qt/coincontroldialog.h \
   qt/coincontroltreewidget.h \
@@ -214,10 +214,10 @@ BITCOIN_QT_H = \
 RES_ICONS = \
   qt/res/icons/add.png \
   qt/res/icons/address-book.png \
-  qt/res/icons/bitcoin.ico \
-  qt/res/icons/bitcoin.png \
-  qt/res/icons/bitcoin_testnet.ico \
-  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/diamond.ico \
+  qt/res/icons/diamond.png \
+  qt/res/icons/diamond_testnet.ico \
+  qt/res/icons/diamond_testnet.png \
   qt/res/icons/clock1.png \
   qt/res/icons/clock2.png \
   qt/res/icons/clock3.png \
@@ -256,15 +256,15 @@ RES_ICONS = \
   qt/res/icons/tx_input.png \
   qt/res/icons/tx_output.png \
   qt/res/icons/tx_mined.png \
-  qt/res/icons/unit_btc.png \
-  qt/res/icons/unit_mbtc.png \
-  qt/res/icons/unit_ubtc.png
+  qt/res/icons/unit_tgd.png \
+  qt/res/icons/unit_mtgd.png \
+  qt/res/icons/unit_utgd.png
 
-BITCOIN_QT_CPP = \
-  qt/bitcoinaddressvalidator.cpp \
-  qt/bitcoinamountfield.cpp \
-  qt/bitcoingui.cpp \
-  qt/bitcoinunits.cpp \
+DIAMOND_QT_CPP = \
+  qt/diamondaddressvalidator.cpp \
+  qt/diamondamountfield.cpp \
+  qt/diamondgui.cpp \
+  qt/diamondunits.cpp \
   qt/clientmodel.cpp \
   qt/csvmodelwriter.cpp \
   qt/guiutil.cpp \
@@ -284,7 +284,7 @@ BITCOIN_QT_CPP = \
   qt/winshutdownmonitor.cpp
 
 if ENABLE_WALLET
-BITCOIN_QT_CPP += \
+DIAMOND_QT_CPP += \
   qt/addressbookpage.cpp \
   qt/addresstablemodel.cpp \
   qt/askpassphrasedialog.cpp \
@@ -320,18 +320,18 @@ RES_IMAGES = \
 
 RES_MOVIES = $(wildcard qt/res/movies/spinner-*.png)
 
-BITCOIN_RC = qt/res/bitcoin-qt-res.rc
+DIAMOND_RC = qt/res/diamond-qt-res.rc
 
-BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+DIAMOND_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
   -I$(builddir)/qt/forms
 
-qt_libbitcoinqt_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+qt_libdiamondqt_a_CPPFLAGS = $(DIAMOND_INCLUDES) $(DIAMOND_QT_INCLUDES) \
   $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
 
-qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+qt_libdiamondqt_a_SOURCES = $(DIAMOND_QT_CPP) $(DIAMOND_QT_H) $(QT_FORMS_UI) \
   $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES)
 
-nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+nodist_qt_libdiamondqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
   $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
 
 # forms/foo.h -> forms/ui_foo.h
@@ -340,67 +340,67 @@ QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:
 # Most files will depend on the forms and moc files as includes. Generate them
 # before anything else.
 $(QT_MOC): $(QT_FORMS_H)
-$(qt_libbitcoinqt_a_OBJECTS) $(qt_bitcoin_qt_OBJECTS) : | $(QT_MOC)
+$(qt_libdiamondqt_a_OBJECTS) $(qt_diamond_qt_OBJECTS) : | $(QT_MOC)
 
 #Generating these with a half-written protobuf header leads to wacky results.
 #This makes sure it's done.
 $(QT_MOC): $(PROTOBUF_H)
 $(QT_MOC_CPP): $(PROTOBUF_H)
 
-# bitcoin-qt binary #
-qt_bitcoin_qt_CPPFLAGS = $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+# diamond-qt binary #
+qt_diamond_qt_CPPFLAGS = $(DIAMOND_INCLUDES) $(DIAMOND_QT_INCLUDES) \
   $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS)
 
-qt_bitcoin_qt_SOURCES = qt/bitcoin.cpp
+qt_diamond_qt_SOURCES = qt/diamond.cpp
 if TARGET_DARWIN
-  qt_bitcoin_qt_SOURCES += $(BITCOIN_MM)
+  qt_diamond_qt_SOURCES += $(DIAMOND_MM)
 endif
 if TARGET_WINDOWS
-  qt_bitcoin_qt_SOURCES += $(BITCOIN_RC)
+  qt_diamond_qt_SOURCES += $(DIAMOND_RC)
 endif
-qt_bitcoin_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+qt_diamond_qt_LDADD = qt/libdiamondqt.a $(LIBDIAMOND_SERVER)
 if ENABLE_WALLET
-qt_bitcoin_qt_LDADD += $(LIBBITCOIN_WALLET)
+qt_diamond_qt_LDADD += $(LIBDIAMOND_WALLET)
 endif
-qt_bitcoin_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBBITCOIN_UNIVALUE) $(LIBLEVELDB) $(LIBMEMENV) \
+qt_diamond_qt_LDADD += $(LIBDIAMOND_CLI) $(LIBDIAMOND_COMMON) $(LIBDIAMOND_UTIL) $(LIBDIAMOND_CRYPTO) $(LIBDIAMOND_UNIVALUE) $(LIBLEVELDB) $(LIBMEMENV) \
   $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS)
 if USE_LIBSECP256K1
-  qt_bitcoin_qt_LDADD += secp256k1/libsecp256k1.la
+  qt_diamond_qt_LDADD += secp256k1/libsecp256k1.la
 endif
-qt_bitcoin_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS)
+qt_diamond_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS)
 
 #locale/foo.ts -> locale/foo.qm
 QT_QM=$(QT_TS:.ts=.qm)
 
 .SECONDARY: $(QT_QM)
 
-qt/bitcoinstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES)
+qt/diamondstrings.cpp: $(libdiamond_server_a_SOURCES) $(libdiamond_wallet_a_SOURCES)
 	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
 	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) ../share/qt/extract_strings_qt.py $^
 
-translate: qt/bitcoinstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+translate: qt/diamondstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(DIAMOND_QT_CPP) $(DIAMOND_QT_H) $(DIAMOND_MM)
 	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts qt/locale/bitcoin_en.ts
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts qt/locale/diamond_en.ts
 
 $(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
 	@test -f $(RCC)
 	@test -f $(@D)/$(<F) || cp -f $< $(@D)
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name bitcoin_locale $(@D)/$(<F) | \
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name diamond_locale $(@D)/$(<F) | \
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
 $(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_MOVIES) $(PROTOBUF_H)
 	@test -f $(RCC)
-	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name bitcoin $< | \
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name diamond $< | \
 	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
 
-CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno
+CLEAN_QT = $(nodist_qt_libdiamondqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno
 
 CLEANFILES += $(CLEAN_QT)
 
-bitcoin_qt_clean: FORCE
-	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_bitcoin_qt_OBJECTS) qt/bitcoin-qt$(EXEEXT) $(LIBBITCOINQT)
+diamond_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libdiamondqt_a_OBJECTS) $(qt_diamond_qt_OBJECTS) qt/diamond-qt$(EXEEXT) $(LIBDIAMONDQT)
 
-bitcoin_qt : qt/bitcoin-qt$(EXEEXT)
+diamond_qt : qt/diamond-qt$(EXEEXT)
 
 ui_%.h: %.ui
 	@test -f $(UIC)

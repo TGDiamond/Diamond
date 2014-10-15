@@ -22,11 +22,11 @@ script: |
   # Integrity Check
   echo "13bfc5ae543cf3aa180ac2485c0bc89495e3ae711fc6fab4f8ffe90dfb4bb677  protobuf-2.5.0.tar.bz2" | sha256sum -c
 
-  for BITS in 32 64; do # for architectures
+  for DIAS in 32 64; do # for architectures
     #
-    INSTALLPREFIX=$HOME/staging${BITS}
-    BUILDDIR=$HOME/build${BITS}
-    if [ "x$BITS" = "x32" ]; then
+    INSTALLPREFIX=$HOME/staging${DIAS}
+    BUILDDIR=$HOME/build${DIAS}
+    if [ "x$DIAS" = "x32" ]; then
       HOST=i686-w64-mingw32
     else
       HOST=x86_64-w64-mingw32
@@ -59,7 +59,7 @@ script: |
     done
     #
     cd $INSTALLPREFIX
-    find include lib host | sort | zip -X@ $OUTDIR/protobuf-win$BITS-2.5.0-gitian-r4.zip
+    find include lib host | sort | zip -X@ $OUTDIR/protobuf-win$DIAS-2.5.0-gitian-r4.zip
     unset LD_PRELOAD
     unset FAKETIME
-  done # for BITS in
+  done # for DIAS in

@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2013 The Bitcoin Core developers
+// Copyright (c) 2011-2013 The Diamond Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -167,30 +167,30 @@ BOOST_AUTO_TEST_CASE( basics ) // constructors, equality, inequality
     BOOST_CHECK_THROW(uint160(std::vector<unsigned char>(OneArray,OneArray+19)), uint_error);
 }
 
-void shiftArrayRight(unsigned char* to, const unsigned char* from, unsigned int arrayLength, unsigned int bitsToShift) 
+void shiftArrayRight(unsigned char* to, const unsigned char* from, unsigned int arrayLength, unsigned int diasToShift) 
 {
     for (unsigned int T=0; T < arrayLength; ++T) 
     {
-        unsigned int F = (T+bitsToShift/8);
+        unsigned int F = (T+diasToShift/8);
         if (F < arrayLength) 
-            to[T]  = from[F] >> (bitsToShift%8);
+            to[T]  = from[F] >> (diasToShift%8);
         else
             to[T] = 0;
         if (F + 1 < arrayLength) 
-            to[T] |= from[(F+1)] << (8-bitsToShift%8);
+            to[T] |= from[(F+1)] << (8-diasToShift%8);
     }
 }
 
-void shiftArrayLeft(unsigned char* to, const unsigned char* from, unsigned int arrayLength, unsigned int bitsToShift) 
+void shiftArrayLeft(unsigned char* to, const unsigned char* from, unsigned int arrayLength, unsigned int diasToShift) 
 {
     for (unsigned int T=0; T < arrayLength; ++T) 
     {
-        if (T >= bitsToShift/8) 
+        if (T >= diasToShift/8) 
         {
-            unsigned int F = T-bitsToShift/8;
-            to[T]  = from[F] << (bitsToShift%8);
-            if (T >= bitsToShift/8+1)
-                to[T] |= from[F-1] >> (8-bitsToShift%8);
+            unsigned int F = T-diasToShift/8;
+            to[T]  = from[F] << (diasToShift%8);
+            if (T >= diasToShift/8+1)
+                to[T] |= from[F-1] >> (8-diasToShift%8);
         }
         else {
             to[T] = 0;
@@ -312,7 +312,7 @@ BOOST_AUTO_TEST_CASE( unaryOperators ) // !    ~    -
 
 // Check if doing _A_ _OP_ _B_ results in the same as applying _OP_ onto each
 // element of Aarray and Barray, and then converting the result into a uint256.
-#define CHECKBITWISEOPERATOR(_A_,_B_,_OP_)                              \
+#define CHECKDIAWISEOPERATOR(_A_,_B_,_OP_)                              \
     for (unsigned int i = 0; i < 32; ++i) { TmpArray[i] = _A_##Array[i] _OP_ _B_##Array[i]; } \
     BOOST_CHECK(uint256(std::vector<unsigned char>(TmpArray,TmpArray+32)) == (_A_##L _OP_ _B_##L)); \
     for (unsigned int i = 0; i < 20; ++i) { TmpArray[i] = _A_##Array[i] _OP_ _B_##Array[i]; } \
@@ -322,25 +322,25 @@ BOOST_AUTO_TEST_CASE( unaryOperators ) // !    ~    -
     TmpL = _A_##L; TmpL _OP_##= _B_##L; BOOST_CHECK(TmpL == (_A_##L _OP_ _B_##L)); \
     TmpS = _A_##S; TmpS _OP_##= _B_##S; BOOST_CHECK(TmpS == (_A_##S _OP_ _B_##S));
 
-BOOST_AUTO_TEST_CASE( bitwiseOperators ) 
+BOOST_AUTO_TEST_CASE( diawiseOperators ) 
 {
     unsigned char TmpArray[32];
     
-    CHECKBITWISEOPERATOR(R1,R2,|)
-    CHECKBITWISEOPERATOR(R1,R2,^)
-    CHECKBITWISEOPERATOR(R1,R2,&)
-    CHECKBITWISEOPERATOR(R1,Zero,|)
-    CHECKBITWISEOPERATOR(R1,Zero,^)
-    CHECKBITWISEOPERATOR(R1,Zero,&)
-    CHECKBITWISEOPERATOR(R1,Max,|)
-    CHECKBITWISEOPERATOR(R1,Max,^)
-    CHECKBITWISEOPERATOR(R1,Max,&)
-    CHECKBITWISEOPERATOR(Zero,R1,|)
-    CHECKBITWISEOPERATOR(Zero,R1,^)
-    CHECKBITWISEOPERATOR(Zero,R1,&)
-    CHECKBITWISEOPERATOR(Max,R1,|)
-    CHECKBITWISEOPERATOR(Max,R1,^)
-    CHECKBITWISEOPERATOR(Max,R1,&)
+    CHECKDIAWISEOPERATOR(R1,R2,|)
+    CHECKDIAWISEOPERATOR(R1,R2,^)
+    CHECKDIAWISEOPERATOR(R1,R2,&)
+    CHECKDIAWISEOPERATOR(R1,Zero,|)
+    CHECKDIAWISEOPERATOR(R1,Zero,^)
+    CHECKDIAWISEOPERATOR(R1,Zero,&)
+    CHECKDIAWISEOPERATOR(R1,Max,|)
+    CHECKDIAWISEOPERATOR(R1,Max,^)
+    CHECKDIAWISEOPERATOR(R1,Max,&)
+    CHECKDIAWISEOPERATOR(Zero,R1,|)
+    CHECKDIAWISEOPERATOR(Zero,R1,^)
+    CHECKDIAWISEOPERATOR(Zero,R1,&)
+    CHECKDIAWISEOPERATOR(Max,R1,|)
+    CHECKDIAWISEOPERATOR(Max,R1,^)
+    CHECKDIAWISEOPERATOR(Max,R1,&)
 
     uint256 TmpL;
     uint160 TmpS;
@@ -438,7 +438,7 @@ BOOST_AUTO_TEST_CASE( plusMinus )
     TmpL = R1L;
     BOOST_CHECK(--TmpL == R1L-1);
 
-    // 160-bit; copy-pasted
+    // 160-dia; copy-pasted
     uint160 TmpS = 0;
     BOOST_CHECK(R1S+R2S == uint160(R1LplusR2L));
     TmpS += R1S;
@@ -752,7 +752,7 @@ BOOST_AUTO_TEST_CASE(bignum_SetCompact)
     BOOST_CHECK_EQUAL(fNegative, false);
     BOOST_CHECK_EQUAL(fOverflow, false);
 
-    // Make sure that we don't generate compacts with the 0x00800000 bit set
+    // Make sure that we don't generate compacts with the 0x00800000 dia set
     num = 0x80;
     BOOST_CHECK_EQUAL(num.GetCompact(), 0x02008000U);
 
@@ -825,12 +825,12 @@ BOOST_AUTO_TEST_CASE( getmaxcoverage ) // some more tests just to get 100% cover
     BOOST_CHECK(~R1L != R1L); BOOST_CHECK(R1L != ~R1L); 
     BOOST_CHECK(~R1S != R1S); BOOST_CHECK(R1S != ~R1S); 
     unsigned char TmpArray[32];
-    CHECKBITWISEOPERATOR(~R1,R2,|)
-    CHECKBITWISEOPERATOR(~R1,R2,^)
-    CHECKBITWISEOPERATOR(~R1,R2,&)
-    CHECKBITWISEOPERATOR(R1,~R2,|)
-    CHECKBITWISEOPERATOR(R1,~R2,^)
-    CHECKBITWISEOPERATOR(R1,~R2,&)
+    CHECKDIAWISEOPERATOR(~R1,R2,|)
+    CHECKDIAWISEOPERATOR(~R1,R2,^)
+    CHECKDIAWISEOPERATOR(~R1,R2,&)
+    CHECKDIAWISEOPERATOR(R1,~R2,|)
+    CHECKDIAWISEOPERATOR(R1,~R2,^)
+    CHECKDIAWISEOPERATOR(R1,~R2,&)
 }
 
 BOOST_AUTO_TEST_SUITE_END()

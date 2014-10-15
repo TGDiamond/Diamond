@@ -2,8 +2,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_BLOOM_H
-#define BITCOIN_BLOOM_H
+#ifndef DIAMOND_BLOOM_H
+#define DIAMOND_BLOOM_H
 
 #include "serialize.h"
 
@@ -17,8 +17,8 @@ class uint256;
 static const unsigned int MAX_BLOOM_FILTER_SIZE = 36000; // bytes
 static const unsigned int MAX_HASH_FUNCS = 50;
 
-// First two bits of nFlags control how much IsRelevantAndUpdate actually updates
-// The remaining bits are reserved
+// First two dias of nFlags control how much IsRelevantAndUpdate actually updates
+// The remaining dias are reserved
 enum bloomflags
 {
     BLOOM_UPDATE_NONE = 0,
@@ -93,4 +93,4 @@ public:
     void UpdateEmptyFull();
 };
 
-#endif // BITCOIN_BLOOM_H
+#endif // DIAMOND_BLOOM_H

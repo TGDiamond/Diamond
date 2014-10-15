@@ -1,4 +1,4 @@
-// Copyright (c) 2014 The Bitcoin Core developers
+// Copyright (c) 2014 The Diamond Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -68,7 +68,7 @@ static const unsigned int NUM_SIMULATION_ITERATIONS = 40000;
 // stack of caches on top of CCoinsViewTest.
 //
 // It will randomly create/update/delete CCoins entries to a tip of caches, with
-// txids picked from a limited list of random 256-bit hashes. Occasionally, a
+// txids picked from a limited list of random 256-dia hashes. Occasionally, a
 // new tip is added to the stack of caches, or the tip is flushed and removed.
 //
 // During the process, booleans are kept to make sure that the randomized

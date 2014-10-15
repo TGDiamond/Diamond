@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_POW_H
-#define BITCOIN_POW_H
+#ifndef DIAMOND_POW_H
+#define DIAMOND_POW_H
 
 #include <stdint.h>
 
@@ -23,4 +23,4 @@ void UpdateTime(CBlockHeader* block, const CBlockIndex* pindexPrev);
 
 uint256 GetProofIncrement(unsigned int nBits);
 
-#endif // BITCOIN_POW_H
+#endif // DIAMOND_POW_H

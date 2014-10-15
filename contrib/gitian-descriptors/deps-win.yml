@@ -1,5 +1,5 @@
 ---
-name: "bitcoin-deps"
+name: "diamond-deps"
 suites:
 - "precise"
 architectures:
@@ -35,11 +35,11 @@ script: |
   echo "32c7acf1608b9c8b71b743b9780adb7a7b347563dbfb4a5263761056da44cc96  libpng-1.6.8.tar.gz"    | sha256sum -c
   echo "dfd71487513c871bad485806bfd1fdb304dedc84d2b01a8fb8e0940b50597a98  qrencode-3.4.3.tar.bz2" | sha256sum -c
 
-  for BITS in 32 64; do # for architectures
+  for DIAS in 32 64; do # for architectures
     #
-    INSTALLPREFIX=$HOME/staging${BITS}
-    BUILDDIR=$HOME/build${BITS}
-    if [ "x$BITS" = "x32" ]; then
+    INSTALLPREFIX=$HOME/staging${DIAS}
+    BUILDDIR=$HOME/build${DIAS}
+    if [ "x$DIAS" = "x32" ]; then
       HOST=i686-w64-mingw32
     else
       HOST=x86_64-w64-mingw32
@@ -50,7 +50,7 @@ script: |
     #
     tar xzf $INDIR/openssl-1.0.1h.tar.gz
     cd openssl-1.0.1h
-    if [ "x$BITS" = "x32" ]; then
+    if [ "x$DIAS" = "x32" ]; then
       OPENSSL_TGT=mingw
     else
       OPENSSL_TGT=mingw64
@@ -124,5 +124,5 @@ script: |
     done
     #
     cd $INSTALLPREFIX
-    find include lib | sort | zip -X@ $OUTDIR/bitcoin-deps-win$BITS-gitian-r13.zip
-  done # for BITS in
+    find include lib | sort | zip -X@ $OUTDIR/diamond-deps-win$DIAS-gitian-r13.zip
+  done # for DIAS in

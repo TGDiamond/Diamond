@@ -4,7 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifdef HAVE_CONFIG_H
-#include "bitcoin-config.h"
+#include "diamond-config.h"
 #endif
 
 #include "netbase.h"
@@ -873,7 +873,7 @@ std::vector<unsigned char> CNetAddr::GetGroup() const
         nClass = NET_UNROUTABLE;
         nBits = 0;
     }
-    // for IPv4 addresses, '1' + the 16 higher-order bits of the IP
+    // for IPv4 addresses, '1' + the 16 higher-order dias of the IP
     // includes mapped IPv4, SIIT translated IPv4, and the well-known prefix
     else if (IsIPv4() || IsRFC6145() || IsRFC6052())
     {
@@ -1188,10 +1188,10 @@ CSubNet::CSubNet(const std::string &strSubnet, bool fAllowLookup)
             int noffset = network.IsIPv4() ? (12 * 8) : 0;
             if (ParseInt32(strNetmask, &n)) // If valid number, assume /24 symtex
             {
-                if(n >= 0 && n <= (128 - noffset)) // Only valid if in range of bits of address
+                if(n >= 0 && n <= (128 - noffset)) // Only valid if in range of dias of address
                 {
                     n += noffset;
-                    // Clear bits [n..127]
+                    // Clear dias [n..127]
                     for (; n < 128; ++n)
                         netmask[n>>3] &= ~(1<<(n&7));
                 }

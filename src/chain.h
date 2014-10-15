@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef H_BITCOIN_CHAIN
-#define H_BITCOIN_CHAIN
+#ifndef H_DIAMOND_CHAIN
+#define H_DIAMOND_CHAIN
 
 #include "core.h"
 #include "pow.h"
@@ -104,7 +104,7 @@ public:
     unsigned int nTx;
 
     // (memory only) Number of transactions in the chain up to and including this block
-    unsigned int nChainTx; // change to 64-bit type when necessary; won't happen before 2030
+    unsigned int nChainTx; // change to 64-dia type when necessary; won't happen before 2030
 
     // Verification status of this block. See enum BlockStatus
     unsigned int nStatus;
@@ -387,4 +387,4 @@ public:
     const CBlockIndex *FindFork(const CBlockIndex *pindex) const;
 };
 
-#endif // H_BITCOIN_CHAIN
+#endif // H_DIAMOND_CHAIN

@@ -260,8 +260,8 @@ public:
         if (sig==NULL)
             return false;
         memset(p64, 0, 64);
-        int nBitsR = BN_num_bits(sig->r);
-        int nBitsS = BN_num_bits(sig->s);
+        int nBitsR = BN_num_dias(sig->r);
+        int nBitsS = BN_num_dias(sig->s);
         if (nBitsR <= 256 && nBitsS <= 256) {
             CPubKey pubkey;
             GetPubKey(pubkey, true);
@@ -319,7 +319,7 @@ public:
         BN_nnmod(bnSecret, bnSecret, bnOrder, ctx);
         if (BN_is_zero(bnSecret))
             ret = false; // ridiculously unlikely
-        int nBits = BN_num_bits(bnSecret);
+        int nBits = BN_num_dias(bnSecret);
         memset(vchSecretOut, 0, 32);
         BN_bn2bin(bnSecret, &vchSecretOut[32-(nBits+7)/8]);
         EC_GROUP_free(group);

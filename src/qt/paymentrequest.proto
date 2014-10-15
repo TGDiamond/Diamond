@@ -1,16 +1,16 @@
 //
-// Simple Bitcoin Payment Protocol messages
+// Simple Diamond Payment Protocol messages
 //
 // Use fields 100+ for extensions;
 // to avoid conflicts, register extensions at:
-// https://en.bitcoin.it/wiki/Payment_Request
+// https://en.diamond.it/wiki/Payment_Request
 //
 
 package payments;
-option java_package = "org.bitcoin.protocols.payments";
+option java_package = "org.diamond.protocols.payments";
 option java_outer_classname = "Protos";
 
-// Generalized form of "send payment to this/these bitcoin addresses"
+// Generalized form of "send payment to this/these diamond addresses"
 message Output {
 	optional uint64 amount = 1 [default = 0]; // amount is integer-number-of-satoshis
 	required bytes script = 2; // usually one of the standard Script forms
@@ -22,7 +22,7 @@ message PaymentDetails {
         optional uint64 expires = 4;        // Timestamp; when this request should be considered invalid
         optional string memo = 5;           // Human-readable description of request for the customer
         optional string payment_url = 6;    // URL to send Payment and get PaymentACK
-        optional bytes merchant_data = 7;   // Arbitrary data to include in the Payment message
+        optional bytes merchant_data = 7;   // Ardiarary data to include in the Payment message
 }
 message PaymentRequest {
         optional uint32 payment_details_version = 1 [default = 1];

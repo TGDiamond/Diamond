@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2014 The Bitcoin Core developers
+// Copyright (c) 2011-2014 The Diamond Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -106,20 +106,20 @@ BOOST_AUTO_TEST_CASE(DoS_bantime)
     BOOST_CHECK(!CNode::IsBanned(addr));
 }
 
-static bool CheckNBits(unsigned int nbits1, int64_t time1, unsigned int nbits2, int64_t time2)\
+static bool CheckNBits(unsigned int ndias1, int64_t time1, unsigned int ndias2, int64_t time2)\
 {
     if (time1 > time2)
-        return CheckNBits(nbits2, time2, nbits1, time1);
+        return CheckNBits(ndias2, time2, ndias1, time1);
     int64_t deltaTime = time2-time1;
 
-    return CheckMinWork(nbits2, nbits1, deltaTime);
+    return CheckMinWork(ndias2, ndias1, deltaTime);
 }
 
-BOOST_AUTO_TEST_CASE(DoS_checknbits)
+BOOST_AUTO_TEST_CASE(DoS_checkndias)
 {
     using namespace boost::assign; // for 'map_list_of()'
 
-    // Timestamps,nBits from the bitcoin block chain.
+    // Timestamps,nBits from the diamond block chain.
     // These are the block-chain checkpoint blocks
     typedef std::map<int64_t, unsigned int> BlockData;
     BlockData chainData =

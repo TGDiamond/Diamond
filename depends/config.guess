@@ -217,7 +217,7 @@ case "${UNAME_MACHINE}:${UNAME_SYSTEM}:${UNAME_RELEASE}:${UNAME_VERSION}" in
 	exit ;;
     *:Bitrig:*:*)
 	UNAME_MACHINE_ARCH=`arch | sed 's/Bitrig.//'`
-	echo ${UNAME_MACHINE_ARCH}-unknown-bitrig${UNAME_RELEASE}
+	echo ${UNAME_MACHINE_ARCH}-unknown-diarig${UNAME_RELEASE}
 	exit ;;
     *:OpenBSD:*:*)
 	UNAME_MACHINE_ARCH=`arch | sed 's/OpenBSD.//'`
@@ -360,13 +360,13 @@ case "${UNAME_MACHINE}:${UNAME_SYSTEM}:${UNAME_RELEASE}:${UNAME_VERSION}" in
     i86pc:SunOS:5.*:* | i86xen:SunOS:5.*:*)
 	eval $set_cc_for_build
 	SUN_ARCH="i386"
-	# If there is a compiler, see if it is configured for 64-bit objects.
+	# If there is a compiler, see if it is configured for 64-dia objects.
 	# Note that the Sun cc does not turn __LP64__ into 1 like gcc does.
 	# This test works for both compilers.
 	if [ "$CC_FOR_BUILD" != 'no_compiler_found' ]; then
-	    if (echo '#ifdef __amd64'; echo IS_64BIT_ARCH; echo '#endif') | \
+	    if (echo '#ifdef __amd64'; echo IS_64DIA_ARCH; echo '#endif') | \
 		(CCOPTS= $CC_FOR_BUILD -E - 2>/dev/null) | \
-		grep IS_64BIT_ARCH >/dev/null
+		grep IS_64DIA_ARCH >/dev/null
 	    then
 		SUN_ARCH="x86_64"
 	    fi
@@ -615,12 +615,12 @@ EOF
 	    9000/[678][0-9][0-9])
 		if [ -x /usr/bin/getconf ]; then
 		    sc_cpu_version=`/usr/bin/getconf SC_CPU_VERSION 2>/dev/null`
-		    sc_kernel_bits=`/usr/bin/getconf SC_KERNEL_BITS 2>/dev/null`
+		    sc_kernel_dias=`/usr/bin/getconf SC_KERNEL_DIAS 2>/dev/null`
 		    case "${sc_cpu_version}" in
 		      523) HP_ARCH="hppa1.0" ;; # CPU_PA_RISC1_0
 		      528) HP_ARCH="hppa1.1" ;; # CPU_PA_RISC1_1
 		      532)                      # CPU_PA_RISC2_0
-			case "${sc_kernel_bits}" in
+			case "${sc_kernel_dias}" in
 			  32) HP_ARCH="hppa2.0n" ;;
 			  64) HP_ARCH="hppa2.0w" ;;
 			  '') HP_ARCH="hppa2.0" ;;   # HP-UX 10.20
@@ -637,8 +637,8 @@ EOF
 
 		int main ()
 		{
-		#if defined(_SC_KERNEL_BITS)
-		    long bits = sysconf(_SC_KERNEL_BITS);
+		#if defined(_SC_KERNEL_DIAS)
+		    long dias = sysconf(_SC_KERNEL_DIAS);
 		#endif
 		    long cpu  = sysconf (_SC_CPU_VERSION);
 
@@ -647,14 +647,14 @@ EOF
 			case CPU_PA_RISC1_0: puts ("hppa1.0"); break;
 			case CPU_PA_RISC1_1: puts ("hppa1.1"); break;
 			case CPU_PA_RISC2_0:
-		#if defined(_SC_KERNEL_BITS)
-			    switch (bits)
+		#if defined(_SC_KERNEL_DIAS)
+			    switch (dias)
 				{
 				case 64: puts ("hppa2.0w"); break;
 				case 32: puts ("hppa2.0n"); break;
 				default: puts ("hppa2.0"); break;
 				} break;
-		#else  /* !defined(_SC_KERNEL_BITS) */
+		#else  /* !defined(_SC_KERNEL_DIAS) */
 			    puts ("hppa2.0"); break;
 		#endif
 			default: puts ("hppa1.0"); break;
@@ -670,9 +670,9 @@ EOF
 	then
 	    eval $set_cc_for_build
 
-	    # hppa2.0w-hp-hpux* has a 64-bit kernel and a compiler generating
-	    # 32-bit code.  hppa64-hp-hpux* has the same kernel and a compiler
-	    # generating 64-bit code.  GNU and HP use different nomenclature:
+	    # hppa2.0w-hp-hpux* has a 64-dia kernel and a compiler generating
+	    # 32-dia code.  hppa64-hp-hpux* has the same kernel and a compiler
+	    # generating 64-dia code.  GNU and HP use different nomenclature:
 	    #
 	    # $ CC_FOR_BUILD=cc ./config.guess
 	    # => hppa2.0w-hp-hpux11.23
@@ -1262,9 +1262,9 @@ EOF
 	fi
 	if test `echo "$UNAME_RELEASE" | sed -e 's/\..*//'` -le 10 ; then
 	    if [ "$CC_FOR_BUILD" != 'no_compiler_found' ]; then
-		if (echo '#ifdef __LP64__'; echo IS_64BIT_ARCH; echo '#endif') | \
+		if (echo '#ifdef __LP64__'; echo IS_64DIA_ARCH; echo '#endif') | \
 		    (CCOPTS= $CC_FOR_BUILD -E - 2>/dev/null) | \
-		    grep IS_64BIT_ARCH >/dev/null
+		    grep IS_64DIA_ARCH >/dev/null
 		then
 		    case $UNAME_PROCESSOR in
 			i386) UNAME_PROCESSOR=x86_64 ;;
@@ -1276,7 +1276,7 @@ EOF
 	    # Avoid executing cc on OS X 10.9, as it ships with a stub
 	    # that puts up a graphical alert prompting to install
 	    # developer tools.  Any system running Mac OS X 10.7 or
-	    # later (Darwin 11 and later) is required to have a 64-bit
+	    # later (Darwin 11 and later) is required to have a 64-dia
 	    # processor. This is not true of the ARM version of Darwin
 	    # that Apple uses in portable devices.
 	    UNAME_PROCESSOR=x86_64

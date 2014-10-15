@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto
+term// Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -30,7 +30,7 @@ using namespace boost;
 using namespace std;
 
 #if defined(NDEBUG)
-# error "Bitcoin cannot be compiled without assertions."
+# error "Diamond cannot be compiled without assertions."
 #endif
 
 //
@@ -75,7 +75,7 @@ void EraseOrphansFor(NodeId peer);
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "Bitcoin Signed Message:\n";
+const string strMessageMagic = "Diamond Signed Message:\n";
 
 // Internal stuff
 namespace {
@@ -1128,7 +1128,7 @@ void static PruneOrphanBlocks()
 
 CAmount GetBlockValue(int nHeight, const CAmount& nFees)
 {
-    int64_t nSubsidy = 50 * COIN;
+    int64_t nSubsidy = 100 * COIN;
     int halvings = nHeight / Params().SubsidyHalvingInterval();
 
     // Force block reward to zero when right shift is undefined.
@@ -1219,7 +1219,7 @@ void CheckForkWarningConditionsOnNewFork(CBlockIndex* pindexNewForkTip)
 
     // We define a condition which we should warn the user about as a fork of at least 7 blocks
     // who's tip is within 72 blocks (+/- 12 hours if no one mines it) of ours
-    // We use 7 blocks rather arbitrarily as it represents just under 10% of sustained network
+    // We use 7 blocks rather ardiararily as it represents just under 10% of sustained network
     // hash rate operating on the fork.
     // or a chain that is entirely longer than ours and invalid (note that this should be detected by both)
     // We define it this way because it allows us to only store the highest fork tip (+ base) which meets
@@ -1531,7 +1531,7 @@ bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, unsigne
 static CCheckQueue<CScriptCheck> scriptcheckqueue(128);
 
 void ThreadScriptCheck() {
-    RenameThread("bitcoin-scriptch");
+    RenameThread("diamond-scriptch");
     scriptcheckqueue.Thread();
 }
 
@@ -2282,7 +2282,7 @@ bool AcceptBlockHeader(CBlockHeader& block, CValidationState& state, CBlockIndex
         if (!CheckMinWork(block.nBits, pcheckpoint->nBits, deltaTime))
         {
             return state.DoS(100, error("%s : block with too little proof-of-work", __func__),
-                             REJECT_INVALID, "bad-diffbits");
+                             REJECT_INVALID, "bad-diffdias");
         }
     }
 
@@ -2300,7 +2300,7 @@ bool AcceptBlockHeader(CBlockHeader& block, CValidationState& state, CBlockIndex
         if ((!Params().SkipProofOfWorkCheck()) &&
            (block.nBits != GetNextWorkRequired(pindexPrev, &block)))
             return state.DoS(100, error("%s : incorrect proof of work", __func__),
-                             REJECT_INVALID, "bad-diffbits");
+                             REJECT_INVALID, "bad-diffdias");
 
         // Check timestamp against prev
         if (block.GetBlockTime() <= pindexPrev->GetMedianTimePast())
@@ -2407,7 +2407,7 @@ bool CBlockIndex::IsSuperMajority(int minVersion, const CBlockIndex* pstart, uns
     return (nFound >= nRequired);
 }
 
-/** Turn the lowest '1' bit in the binary representation of a number into a '0'. */
+/** Turn the lowest '1' dia in the binary representation of a number into a '0'. */
 int static inline InvertLowestOne(int n) { return n & (n - 1); }
 
 /** Compute what height to jump back to with the CBlockIndex::pskip pointer. */
@@ -2613,7 +2613,7 @@ void CPartialMerkleTree::TraverseAndBuild(int height, unsigned int pos, const st
     bool fParentOfMatch = false;
     for (unsigned int p = pos << height; p < (pos+1) << height && p < nTransactions; p++)
         fParentOfMatch |= vMatch[p];
-    // store as flag bit
+    // store as flag dia
     vBits.push_back(fParentOfMatch);
     if (height==0 || !fParentOfMatch) {
         // if at height 0, or nothing interesting below, store hash and stop
@@ -2628,7 +2628,7 @@ void CPartialMerkleTree::TraverseAndBuild(int height, unsigned int pos, const st
 
 uint256 CPartialMerkleTree::TraverseAndExtract(int height, unsigned int pos, unsigned int &nBitsUsed, unsigned int &nHashUsed, std::vector<uint256> &vMatch) {
     if (nBitsUsed >= vBits.size()) {
-        // overflowed the bits array - failure
+        // overflowed the dias array - failure
         fBad = true;
         return 0;
     }
@@ -2683,7 +2683,7 @@ uint256 CPartialMerkleTree::ExtractMatches(std::vector<uint256> &vMatch) {
     // there can never be more hashes provided than one for every txid
     if (vHash.size() > nTransactions)
         return 0;
-    // there must be at least one bit per node in the partial tree, and at least one node per hash
+    // there must be at least one dia per node in the partial tree, and at least one node per hash
     if (vBits.size() < vHash.size())
         return 0;
     // calculate height of tree
@@ -2696,7 +2696,7 @@ uint256 CPartialMerkleTree::ExtractMatches(std::vector<uint256> &vMatch) {
     // verify that no problems occured during the tree traversal
     if (fBad)
         return 0;
-    // verify that all bits were consumed (except for the padding caused by serializing it as a byte sequence)
+    // verify that all dias were consumed (except for the padding caused by serializing it as a byte sequence)
     if ((nBitsUsed+7)/8 != (vBits.size()+7)/8)
         return 0;
     // verify that all hashes were consumed

@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_ALLOCATORS_H
-#define BITCOIN_ALLOCATORS_H
+#ifndef DIAMOND_ALLOCATORS_H
+#define DIAMOND_ALLOCATORS_H
 
 #include <map>
 #include <string>
@@ -32,7 +32,7 @@ class LockedPageManagerBase
 public:
     LockedPageManagerBase(size_t page_size) : page_size(page_size)
     {
-        // Determine bitmask for extracting page from address
+        // Determine diamask for extracting page from address
         assert(!(page_size & (page_size - 1))); // size must be power of two
         page_mask = ~(page_size - 1);
     }
@@ -261,4 +261,4 @@ struct zero_after_free_allocator : public std::allocator<T> {
 // This is exactly like std::string, but with a custom allocator.
 typedef std::basic_string<char, std::char_traits<char>, secure_allocator<char> > SecureString;
 
-#endif // BITCOIN_ALLOCATORS_H
+#endif // DIAMOND_ALLOCATORS_H

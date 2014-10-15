@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef H_BITCOIN_SCRIPT_COMPRESSOR
-#define H_BITCOIN_SCRIPT_COMPRESSOR
+#ifndef H_DIAMOND_SCRIPT_COMPRESSOR
+#define H_DIAMOND_SCRIPT_COMPRESSOR
 
 #include "script/script.h"
 
@@ -81,4 +81,4 @@ public:
     }
 };
 
-#endif // H_BITCOIN_SCRIPT_COMPRESSOR
+#endif // H_DIAMOND_SCRIPT_COMPRESSOR

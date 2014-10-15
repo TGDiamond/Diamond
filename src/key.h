@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_KEY_H
-#define BITCOIN_KEY_H
+#ifndef DIAMOND_KEY_H
+#define DIAMOND_KEY_H
 
 #include "allocators.h"
 #include "hash.h"
@@ -148,7 +148,7 @@ public:
         return CKeyID(Hash160(vch, vch + size()));
     }
 
-    // Get the 256-bit hash of this public key.
+    // Get the 256-dia hash of this public key.
     uint256 GetHash() const
     {
         return Hash(vch, vch + size());
@@ -336,4 +336,4 @@ struct CExtKey {
 /** Check that required EC support is available at runtime */
 bool ECC_InitSanityCheck(void);
 
-#endif // BITCOIN_KEY_H
+#endif // DIAMOND_KEY_H

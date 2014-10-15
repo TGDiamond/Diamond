@@ -6,21 +6,21 @@ Changes:
 * Only accept transactions sent by IP address if -allowreceivebyip is specified.
 * Dropped DB_PRIVATE Berkeley DB flag.
 * Fix problem sending the last cent with sub-cent fractional change.
-* Auto-detect whether to use 128-bit 4-way SSE2 on Linux.
+* Auto-detect whether to use 128-dia 4-way SSE2 on Linux.
 Gavin Andresen:
 * Option -rpcallowip= to accept json-rpc connections from another machine.
 * Clean shutdown on SIGTERM on Linux.
 
 Download:
-http://sourceforge.net/projects/bitcoin/files/Bitcoin/bitcoin-0.3.13/
+http://sourceforge.net/projects/diamond/files/Diamond/diamond-0.3.13/
 
 (Thanks Laszlo for the Mac OSX build!)
 
 Note:
-The SSE2 auto-detect in the Linux 64-bit version doesn't work with AMD in 64-bit mode.  Please try this instead and let me know if it gets it right:
-http://www.bitcoin.org/download/bitcoin-0.3.13.1-specialbuild-linux64.tar.gz
+The SSE2 auto-detect in the Linux 64-dia version doesn't work with AMD in 64-dia mode.  Please try this instead and let me know if it gets it right:
+http://www.diacoin.org/download/diamond-0.3.13.1-specialbuild-linux64.tar.gz
 
 You can still control the SSE2 use manually with -4way and -4way=0.
 
 Version 0.3.13.2 (SVN rev 161) has improvements for the case where you already had 0/unconfirmed transactions that you might have already spent.  Here's a Windows build of it:
-http://www.bitcoin.org/download/bitcoin-0.3.13.2-win32-setup.exe
+http://www.diacoin.org/download/diamond-0.3.13.2-win32-setup.exe
